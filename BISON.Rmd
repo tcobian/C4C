@@ -1,0 +1,121 @@
+---
+title: "BISON"
+author: "Tyler Cobian"
+date: "11/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+laod in packages
+
+```{r, results='hide'}
+library(tidyverse)
+
+```
+Load in the new data sets
+
+```{r, results='hide'}
+regen<- read_csv("bison_regen_trees.csv")
+regen_no_trees<- read_csv("BISON_regen_NO_trees.csv")
+organic<- read_csv("BISON_organic.csv")
+```
+Graphs for regen
+
+```{r}
+# make a graph for total change in SOC in kg 
+
+total_soc_regen<- ggplot(regen, aes(x = Year, y = End_SOC))+
+  geom_line(col = "dark orange")+
+  theme_bw()+
+  labs(x = "Year", y = "kg SOC", title = "Total Change in SOC", caption = ("Effects of regenerative organic practices in Bison grazing on soil organic carbon levels. Practices \nimplimented include: native perennial grasses, compost addition, and addition of apple trees"))
+total_soc_regen
+
+
+# make a grapgh for changes in SOC per soil layer
+
+soc_horizon_regen<- ggplot()+
+  geom_line(data = regen, aes(x = Year, y = kgSOC_10cm), col = "rosybrown")+
+  geom_line(data = regen, aes(x = Year, y = kgSOC_20cm), col = "tomato1")+
+  geom_line(data = regen, aes(x = Year, y = kgSOC_30cm), col = "tan2")+
+  geom_line(data = regen, aes(x = Year, y = kgSOC_40cm), col = "goldenrod2")+
+  geom_line(data = regen, aes(x = Year, y = kgSOC_50cm), col = "gold1")+
+  labs(x = "Year", y = "kg of SOC by soil depth", title = "Changes in SOC per hectare throughout soil depth", caption = "Changes in soil organic carbon over time broken into depth of 0-10cm, 10-20cm, 20-30cm, 30-40cm and 40-50cm.\n Practices implimented include: native perennial gcrasses, compost application, and integration of apple trees.")
+
+soc_horizon_regen
+
+
+```
+Make graphs for regen without trees
+
+```{r}
+# make a graph for total changes in SOC
+total_soc_regen_no_trees<- ggplot(regen_no_trees, aes(x = Year, y = End_SOC))+
+  geom_line(col = "dark blue")+
+  theme_bw()+
+  labs(x = "Year", y = "kg SOC", title = "Total Change in SOCper hectare", caption = ("Effects of regenerative organic practices in Bison grazing on soil organic carbon levels. Practices \nimplimented include: native perennial grasses and compost addition"))
+total_soc_regen_no_trees
+
+
+# make a graph for SOC per soil layer
+
+soc_horizon_regen_no_trees<- ggplot()+
+  geom_line(data = regen_no_trees, aes(x = Year, y = kgSOC_10cm), col = "steelblue4")+
+  geom_line(data = regen_no_trees, aes(x = Year, y = kgSOC_20cm), col = "steelblue3")+
+  geom_line(data = regen_no_trees, aes(x = Year, y = kgSOC_30cm), col = "lightblue3")+
+  geom_line(data = regen_no_trees, aes(x = Year, y = kgSOC_40cm), col = "lightblue1")+
+  geom_line(data = regen_no_trees, aes(x = Year, y = kgSOC_50cm), col = "cyan4")+
+  labs(x = "Year", y = "kg of SOC by soil depth", title = "Changes in SOC per hectare throughout soil depth per hecatre", caption = "Changes in soil organic carbon over time broken into depth of 0-10cm, 10-20cm, 20-30cm, 30-40cm and 40-50cm.\n Practices implimented include: native perennial gcrasses, compost application.")
+
+soc_horizon_regen_no_trees
+
+
+```
+
+Make graphs for Organics
+
+```{r}
+# make a graph for total change in SOC in kg 
+
+total_soc_organic<- ggplot(organic, aes(x = Year, y = End_SOC))+
+  geom_line(col = "dark green")+
+  theme_bw()+
+  labs(x = "Year", y = "kg SOC", title = "Total Change in SOC", caption = ("Effects of organic practices in Bison grazing on soil organic carbon levels"))
+total_soc_organic
+
+
+# make a grapgh for changes in SOC per soil layer
+
+soc_horizon_organic<- ggplot()+
+  geom_line(data = organic, aes(x = Year, y = kgSOC_10cm), col = "darkgreen")+
+  geom_line(data = organic, aes(x = Year, y = kgSOC_20cm), col = "forestgreen")+
+  geom_line(data = organic, aes(x = Year, y = kgSOC_30cm), col = "springgreen3")+
+  geom_line(data = organic, aes(x = Year, y = kgSOC_40cm), col = "lightgreen")+
+  geom_line(data = organic, aes(x = Year, y = kgSOC_50cm), col = "darkolivegreen1")+
+  labs(x = "Year", y = "kg of SOC by soil depth", title = "Changes in SOC per hectare throughout soil depth", caption = "Changes in soil organic carbon over time broken into depth of 0-10cm, 10-20cm, 20-30cm, 30-40cm and 40-50cm.")
+
+soc_horizon_organic
+
+
+
+
+
+
+
+
+```
+
+Overlay total change in SOC for each system
+```{r}
+
+all_changes_SOC<- ggplot()+
+  geom_line(data = regen, col = "dark orange", aes(x = Year, y = End_SOC))+
+  geom_line(data = regen_no_trees, col = "dark blue", aes(x = Year, y = End_SOC))+
+  geom_line(data = organic, col = "dark green", aes(x = Year, y = End_SOC))
+all_changes_SOC
+
+
+
+
+```
