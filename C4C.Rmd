@@ -15,10 +15,21 @@ Make a Bison and  Cotton graph  for regen
 soc_regen_bison_cotton<- ggplot()+
   geom_line(data = regen_data2, aes(x = Year, y = EndSOC))+
   geom_line(data = regen, aes(x = Year, y = End_SOC))
-soc_regen_bison_cotton
+
+  soc_regen_bison_cotton
 
 
 
 
+```
+
+```{r}
+soc_regen_bison_cotton_mango<- ggplot()+
+  geom_line(data = regen_data2, aes(x = Year, y = EndSOC),col = "rosybrown")+
+  geom_line(data = regen, aes(x = Year, y = End_SOC), col = "blue")+
+  geom_line(data = regen_simple, aes(x = Year,y = End_SOC), col = "green")+
+  theme_bw()
+
+soc_regen_bison_cotton_mango
 ```
 
