@@ -1,0 +1,177 @@
+---
+title: "GP modeling"
+author: "Ilayda Dinc"
+date: "11/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(RColorBrewer)
+library(stargazer)
+library(knitr)
+library(car)
+library(effsize)
+library(forcats)
+library(xtable)
+library(vcdExtra)
+library(corrplot) # For correlation matrices
+library(janitor) # For cleaning up column names
+library(lubridate) # For dealing with dates & times
+library(gganimate) # For adding animation to ggplot graphics
+library(ggimage) 
+library(extrafont)
+library(ggplot2)
+library(kableExtra)
+library(pwr)
+library(plotly)
+library(ggrepel)
+library(ggpubr)
+library(gridExtra)
+library(ggsignif)
+library(FSA)
+library(extrafont)
+library(tinytex)
+library(captioner)
+library(latex2exp)
+library(gapminder)
+library(directlabels)
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+
+regen_data<-read_csv("regen_without.csv")
+
+# total soil C change by soil horizon
+
+# total soil C change by soil horizon
+
+SOC_horizon1<- ggplot()+
+  geom_line(data = regen_data, aes(x = Year, y = SOC_10cm))+
+  geom_text(aes(x = 20, y = 81000, label = "10 cm"))+
+  geom_line(data = regen_data, aes(x = Year, y = SOC_20cm))+
+  geom_text(aes(x = 20, y = 50000, label = "20 cm"))+
+  geom_line(data = regen_data, aes(x = Year, y = SOC_30cm))+
+  geom_text(aes(x = 20, y = 40000, label = "30 cm"))+
+  geom_line(data = regen_data, aes(x = Year, y = SOC_40cm))+
+  geom_text(aes(x = 20 , y = 21000, label = "40 cm"))+
+  geom_line(data = regen_data, aes(x = Year, y = SOC_50cm))+
+  geom_text(aes(x = 20, y = 15000, label = "50 cm"))+
+  labs(x = "Year", y = "SOC t/ha/yr", title = "Regenerative without trees")+
+  theme_bw()
+
+ 
+SOC_horizon1
+
+SOC1<- ggplot(regen_data, aes(x = Year, y = EndSOC))+
+  geom_line()
+SOC1
+
+
+```
+
+```{r echo=FALSE, message=FALSE}
+
+regen_data2<-read_csv("regen_with.csv")
+
+# total soil C change by soil horizon
+
+# total soil C change by soil horizon
+
+SOC_horizon2<- ggplot()+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_10cm))+
+  geom_text(aes(x = 20, y = 81000, label = "10 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_20cm))+
+  geom_text(aes(x = 20, y = 50000, label = "20 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_30cm))+
+  geom_text(aes(x = 20, y = 40000, label = "30 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_40cm))+
+  geom_text(aes(x = 20 , y = 21000, label = "40 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_50cm))+
+  geom_text(aes(x = 20, y = 15000, label = "50 cm"))+
+  labs(x = "Year", y = "SOC t/ha/yr", title = "Regenerative with trees")+
+  theme_bw()
+
+ 
+SOC_horizon2
+
+
+SOC2<- ggplot(regen_data2, aes(x = Year, y = EndSOC))+
+  geom_line()
+
+SOC2
+
+
+
+
+
+```
+
+```{r echo= FALSE, message= FALSE}
+regen_data3 <- read_csv("regen_tree1.csv")
+
+# total soil C change by soil horizon
+
+# total soil C change by soil horizon
+
+SOC_horizon3<- ggplot()+
+  geom_line(data = regen_data3, aes(x = Year, y = SOC_10cm))+
+  geom_text(aes(x = 20, y = 81000, label = "10 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_20cm))+
+  geom_text(aes(x = 20, y = 50000, label = "20 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_30cm))+
+  geom_text(aes(x = 20, y = 40000, label = "30 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_40cm))+
+  geom_text(aes(x = 20 , y = 21000, label = "40 cm"))+
+  geom_line(data = regen_data2, aes(x = Year, y = SOC_50cm))+
+  geom_text(aes(x = 20, y = 15000, label = "50 cm"))+
+  labs(x = "Year", y = "SOC t/ha/yr", title = "Regenerative with trees no harvest")+
+  theme_bw()
+
+ 
+
+SOC_horizon3
+
+
+SOC3<- ggplot(regen_data3, aes(x = Year, y = End_SOC))+
+  geom_line()
+
+SOC3
+
+
+```
+
+```{r echo=FALSE, message=FALSE}
+org_data<-read_csv("org.csv")
+
+# total soil C change by soil horizon
+
+# total soil C change by soil horizon
+
+SOC_horizon4<- ggplot()+
+  geom_line(data = org_data, aes(x = Year, y = SOC_10cm))+
+  geom_text(aes(x = 20, y = 40000, label = "10,20,30 cm"))+
+  geom_line(data = org_data, aes(x = Year, y = SOC_20cm))+
+  geom_line(data = org_data, aes(x = Year, y = SOC_30cm))+
+  geom_line(data = org_data, aes(x = Year, y = SOC_40cm))+
+  geom_text(aes(x = 20 , y = 29000, label = "40 cm"))+
+  geom_line(data = org_data, aes(x = Year, y = SOC_50cm))+
+  geom_text(aes(x = 20, y = 14000, label = "50 cm"))+
+  labs(x = "Year", y = "SOC t/ha/yr", title = "Organic")+
+  theme_bw()
+
+
+
+ 
+SOC_horizon4
+
+
+SOC4<- ggplot(org_data, aes(x = Year, y = EndSOC))+
+  geom_line()
+SOC4
+
+```
+
