@@ -1,0 +1,24 @@
+---
+title: "C4C"
+author: "Tyler Cobian"
+date: "11/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Make a Bison and  Cotton graph  for regen
+
+```{r}
+soc_regen_bison_cotton<- ggplot()+
+  geom_line(data = regen_data2, aes(x = Year, y = EndSOC))+
+  geom_line(data = regen, aes(x = Year, y = End_SOC))
+soc_regen_bison_cotton
+
+
+
+
+```
+
