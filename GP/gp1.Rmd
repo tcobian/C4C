@@ -31,13 +31,10 @@ library(ggrepel)
 library(ggpubr)
 library(gridExtra)
 library(ggsignif)
-library(FSA)
 library(extrafont)
 library(tinytex)
-library(captioner)
-library(latex2exp)
-library(gapminder)
-library(directlabels)
+
+
 
 ```
 
