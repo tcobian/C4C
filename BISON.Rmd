@@ -17,7 +17,11 @@ library(tidyverse)
 Load in the new data sets
 
 ```{r, results='hide'}
-regen<- read_csv("bison_regen_trees.csv")
+regen<- read_csv("BISON_regen.csv") %>% 
+  rename("kgSOC_30cm" = "%SOC_30cm_1") %>% 
+  rename("kgSOC_40cm" = "%SOC_40cm_1")
+
+regen_trees<- read_csv("bison_regen_trees.csv")
 regen_no_trees<- read_csv("BISON_regen_NO_trees.csv")
 organic<- read_csv("BISON_organic.csv")
 ```
