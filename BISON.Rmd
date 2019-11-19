@@ -12,6 +12,8 @@ laod in packages
 
 ```{r, results='hide'}
 library(tidyverse)
+install.packages("ggthemes")
+library(ggthemes)
 
 ```
 Load in the new data sets
@@ -123,3 +125,24 @@ all_changes_SOC
 
 
 ```
+Make a new data point that is initial SOC and end SOC over 20 years
+
+```{r}
+total_D_regen<- regen[20, "End_SOC"] - regen[1, "IniSOC"] 
+total_D_regen
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
