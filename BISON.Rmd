@@ -12,7 +12,6 @@ laod in packages
 
 ```{r, results='hide'}
 library(tidyverse)
-install.packages("ggthemes")
 library(ggthemes)
 
 ```
