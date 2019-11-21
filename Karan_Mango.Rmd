@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(ggthemes)
 
-organic = read_csv("mango_summ_org.csv")
+organic = read_csv("mango_organic_india.csv")
 
 
 org_simple = organic %>% 
@@ -59,9 +59,9 @@ organic_endsoc
 
 ##Doing the same thing for regen
 
-```{r}
+```{r, include=FALSE}
 
-regen = read_csv("mango_summ_regen.csv")
+regen = read_csv("mango_regen_india.csv")
 
 
 regen_simple = regen %>% 
@@ -110,9 +110,9 @@ regen_endsoc
 
 endsoc = ggplot()+
   geom_smooth(data = org_simple, aes(x = Year, y = End_SOC), size = 1, span=0.7, se=FALSE)+
-  geom_text(aes(x=21, y=199000, label = "Organic"))+
+  geom_text(aes(x=21, y=220000, label = "Organic"))+
   geom_smooth(data = regen_simple, aes(x = Year, y = End_SOC), color = "red", size = 1, span=0.7, se=FALSE)+
-  geom_text(aes(x=21, y=203000, label = "Regen"))+
+  geom_text(aes(x=21, y=270000, label = "Regen"))+
   labs(x = "Year", y = "End SOC (kg/ha)", title = "End SOC Regen vs Organic")+
   scale_color_discrete(name = "Legend", labels = c("Organic", "Regen"))+
   theme_gdocs(base_size=11)
