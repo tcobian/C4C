@@ -34,7 +34,7 @@ organic_horizon = ggplot()+
   geom_smooth(data = org_simple, aes(x = Year, y = `SOC_40-50cm`, color = "SOC 40-50cm"), size = 1, span = 0.7, se=FALSE)+
   xlim(0,20)+
   ylim(32000, 50000)+
-  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon")+
+  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon - Organic")+
   theme_gdocs()
   
 organic_horizon
@@ -43,14 +43,14 @@ organic_horizon
 
 organic_dsoc = ggplot(org_simple, aes(x = Year, y = dSOC))+
   geom_line()+
-  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time")+
+  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time - Organic")+
   theme_gdocs()
 
 organic_dsoc
 
 organic_endsoc = ggplot(org_simple, aes(x = Year, y = End_SOC))+
   geom_line()+
-  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time")+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time - Organic")+
   theme_gdocs()
 
 organic_endsoc
@@ -81,21 +81,21 @@ regen_horizon = ggplot()+
   geom_smooth(data = regen_simple, aes(x = Year, y = `SOC_40-50cm`, color = "SOC 40-50cm"), size = 1, span = 0.7, se=FALSE)+
   xlim(0,20)+
   ylim(32000, 50000)+
-  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon")+
+  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon - Regen")+
   theme_gdocs()
 
 regen_horizon
 
 regen_dsoc = ggplot(regen_simple, aes(x = Year, y = dSOC))+
   geom_line()+
-  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time")+
+  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time - Regen")+
   theme_gdocs()
 regen_dsoc
 
 
 regen_endsoc = ggplot(regen_simple, aes(x = Year, y = End_SOC))+
   geom_line()+
-  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time")+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time - Regen")+
   theme_gdocs()
 
 regen_endsoc
@@ -129,13 +129,13 @@ endsoc
 # Organic
 gwp_organic = ggplot(org_simple, aes(x = Year, y = GWP_annual))+
   geom_line()+
-  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change")+
+  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change - Organic")+
   theme_gdocs()
 gwp_organic
 
 gwp_organic_total = ggplot(org_simple, aes(x = Year, y = GWP_total))+
   geom_line()+
-  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP: Organic")+
+  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP - Organic")+
   theme_gdocs()
 gwp_organic_total
 
@@ -143,13 +143,13 @@ gwp_organic_total
 # Regen
 gwp_regen = ggplot(regen_simple, aes(x = Year, y = GWP_annual))+
   geom_line()+
-  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change")+
+  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change - Regen")+
   theme_gdocs()
 gwp_regen
 
 gwp_regen_total = ggplot(org_simple, aes(x = Year, y = GWP_total))+
   geom_line()+
-  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP: Regen")+
+  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP - Regen")+
   theme_gdocs()
 gwp_regen_total
 
