@@ -17,7 +17,7 @@ organic = read_csv("mango_organic_india.csv")
 
 
 org_simple = organic %>% 
-  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC)
+  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC, GWP_annual, GWP_total)
 
 
 ```
@@ -65,7 +65,7 @@ regen = read_csv("mango_regen_india.csv")
 
 
 regen_simple = regen %>% 
-  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC)
+  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC, GWP_annual, GWP_total)
 
 ```
 
@@ -120,3 +120,67 @@ endsoc = ggplot()+
 endsoc
 
 ```
+
+```{r}
+
+## GWP Comparison
+
+
+# Organic
+gwp_organic = ggplot(org_simple, aes(x = Year, y = GWP_annual))+
+  geom_line()+
+  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change")+
+  theme_gdocs()
+gwp_organic
+
+gwp_organic_total = ggplot(org_simple, aes(x = Year, y = GWP_total))+
+  geom_line()+
+  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP: Organic")+
+  theme_gdocs()
+gwp_organic_total
+
+
+# Regen
+gwp_regen = ggplot(regen_simple, aes(x = Year, y = GWP_annual))+
+  geom_line()+
+  labs(x = "Year", y = "Annual GWP", title = "Annual GWP Change")+
+  theme_gdocs()
+gwp_regen
+
+gwp_regen_total = ggplot(org_simple, aes(x = Year, y = GWP_total))+
+  geom_line()+
+  labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP: Regen")+
+  theme_gdocs()
+gwp_regen_total
+
+
+# Comparing GWP and carbon sequestered between organic and regen mangoes
+
+c_sequester_org = org_simple %>% 
+  mutate(abs(GWP_total)) %>% 
+  rename("Carbon Sequestered" = `abs(GWP_total)`)
+
+c_sequester_regen = regen_simple %>% 
+  mutate(abs(GWP_total)) %>% 
+  rename("Carbon Sequestered" = `abs(GWP_total)`)
+
+
+carbon_sqstr = ggplot()+
+  geom_smooth(data = c_sequester_org, aes(x = Year, y = `Carbon Sequestered`), size = 1, span=0.7, se=FALSE)+
+  geom_text(aes(x=21, y=120000, label = "Organic"))+
+  geom_smooth(data = c_sequester_regen, aes(x = Year, y = `Carbon Sequestered`), color = "red", size = 1, span=0.7, se=FALSE)+
+  geom_text(aes(x=21, y=210000, label = "Regen"))+
+  labs(x = "Year", y = "Carbon Sequestered (kg/ha)", title = "Carbon Sequestration of Regen vs Organic")+
+  scale_color_discrete(name = "Legend", labels = c("Organic", "Regen"))+
+  theme_gdocs(base_size=11)
+
+carbon_sqstr
+
+```
+
+
+
+
+
+
+
