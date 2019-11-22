@@ -113,7 +113,7 @@ endsoc = ggplot()+
   geom_text(aes(x=21, y=220000, label = "Organic"))+
   geom_smooth(data = regen_simple, aes(x = Year, y = End_SOC), color = "red", size = 1, span=0.7, se=FALSE)+
   geom_text(aes(x=21, y=270000, label = "Regen"))+
-  labs(x = "Year", y = "End SOC (kg/ha)", title = "End SOC Regen vs Organic")+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "End SOC Regen vs Organic - India")+
   scale_color_discrete(name = "Legend", labels = c("Organic", "Regen"))+
   theme_gdocs(base_size=11)
 
@@ -147,7 +147,7 @@ gwp_regen = ggplot(regen_simple, aes(x = Year, y = GWP_annual))+
   theme_gdocs()
 gwp_regen
 
-gwp_regen_total = ggplot(org_simple, aes(x = Year, y = GWP_total))+
+gwp_regen_total = ggplot(regen_simple, aes(x = Year, y = GWP_total))+
   geom_line()+
   labs(x = "Year", y = "Cumulative GWP (kg CO2e)", title = "Cumulative GWP - Regen")+
   theme_gdocs()
@@ -170,7 +170,7 @@ carbon_sqstr = ggplot()+
   geom_text(aes(x=21, y=120000, label = "Organic"))+
   geom_smooth(data = c_sequester_regen, aes(x = Year, y = `Carbon Sequestered`), color = "red", size = 1, span=0.7, se=FALSE)+
   geom_text(aes(x=21, y=210000, label = "Regen"))+
-  labs(x = "Year", y = "Carbon Sequestered (kg/ha)", title = "Carbon Sequestration of Regen vs Organic")+
+  labs(x = "Year", y = "Carbon Sequestered (kg/ha)", title = "Carbon Sequestration of Regen vs Organic - India")+
   scale_color_discrete(name = "Legend", labels = c("Organic", "Regen"))+
   theme_gdocs(base_size=11)
 
@@ -178,9 +178,112 @@ carbon_sqstr
 
 ```
 
+-----------------------------------
+# NICARAGUA
+
+```{r}
+
+organic_nic = read_csv("mango_organic_nicaragua.csv")
 
 
+org_simple_nic = organic_nic %>% 
+  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC)
 
+```
+
+```{r}
+# Plotting SOC at each soil horizon
+organic_horizon_nic = ggplot()+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = `SOC_0-10cm`, color = "SOC 0-10cm"), size = 1, span = 0.7, se = FALSE)+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = `SOC_10-20cm`, color = "SOC 10-20cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = `SOC_20-30cm`, color = "SOC 20-30cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = `SOC_30-40cm`, color = "SOC 30-40cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = `SOC_40-50cm`, color = "SOC 40-50cm"), size = 1, span = 0.7, se=FALSE)+
+  xlim(0,20)+
+  ylim(20000, 50000)+
+  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon - Organic")+
+  theme_gdocs()
+  
+organic_horizon_nic
+
+# Plotting dSOC over 20 years
+
+organic_dsoc_nic = ggplot(org_simple_nic, aes(x = Year, y = dSOC))+
+  geom_line()+
+  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time - Organic")+
+  theme_gdocs()
+
+organic_dsoc_nic
+
+organic_endsoc_nic = ggplot(org_simple_nic, aes(x = Year, y = End_SOC))+
+  geom_line()+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time - Organic")+
+  theme_gdocs()
+
+organic_endsoc_nic
+
+
+```
+
+
+##Regen
+```{r, include=FALSE}
+regen_nic = read_csv("mango_regen_nicaragua.csv")
+
+
+regen_simple_nic = regen_nic %>% 
+  select(Year, `SOC_0-10cm`, `SOC_10-20cm`, `SOC_20-30cm`, `SOC_30-40cm`, `SOC_40-50cm`, End_SOC, dSOC)
+```
+
+```{r}
+
+regen_horizon_nic = ggplot()+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = `SOC_0-10cm`, color = "SOC 0-10cm"), size = 1, span = 0.7, se = FALSE)+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = `SOC_10-20cm`, color = "SOC 10-20cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = `SOC_20-30cm`, color = "SOC 20-30cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = `SOC_30-40cm`, color = "SOC 30-40cm"), size = 1, span = 0.7, se=FALSE)+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = `SOC_40-50cm`, color = "SOC 40-50cm"), size = 1, span = 0.7, se=FALSE)+
+  xlim(0,20)+
+  ylim(20000, 50000)+
+  labs(x = "Year", y = "Soil Organic Carbon (kgC/ha)", title = "SOC Levels at each Soil Horizon - Regen")+
+  theme_gdocs()
+
+regen_horizon_nic
+
+regen_dsoc_nic = ggplot(regen_simple_nic, aes(x = Year, y = dSOC))+
+  geom_line()+
+  labs(x = "Year", y = "dSOC (kg/ha)", title = "dSOC Over Time - Regen")+
+  theme_gdocs()
+regen_dsoc_nic
+
+
+regen_endsoc_nic = ggplot(regen_simple_nic, aes(x = Year, y = End_SOC))+
+  geom_line()+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "Change in SOC Over Time - Regen")+
+  theme_gdocs()
+
+regen_endsoc_nic
+
+```
+
+
+```{r}
+# regen v organic - Nicaragua
+
+#EndSOC
+
+
+endsoc_nic = ggplot()+
+  geom_smooth(data = org_simple_nic, aes(x = Year, y = End_SOC), size = 1, span=0.7, se=FALSE)+
+  geom_text(aes(x=21, y=170000, label = "Organic"))+
+  geom_smooth(data = regen_simple_nic, aes(x = Year, y = End_SOC), color = "red", size = 1, span=0.7, se=FALSE)+
+  geom_text(aes(x=21, y=200000, label = "Regen"))+
+  labs(x = "Year", y = "End SOC (kg/ha)", title = "End SOC Regen vs Organic - Nicaragua")+
+  scale_color_discrete(name = "Legend", labels = c("Organic", "Regen"))+
+  theme_gdocs(base_size=11)
+
+endsoc_nic
+```
 
 
 
