@@ -17,7 +17,15 @@ library(here)
 
 Data
 ```{r, include=FALSE}
-
+cotton<- read_csv(here("DATA", "cotton_combined.csv"))
+kernza<- read_csv(here("DATA", "kernza_total.csv"))
+kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
+mango<- read_csv(here("DATA", "mango_total.csv"))
+bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
+bison<- read_csv(here("DATA", "bison_total.csv"))
+bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
+bison_comp<- read_csv(here("DATA", "bison_compiling_sensativity.csv"))
+bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
 
 ```
 
