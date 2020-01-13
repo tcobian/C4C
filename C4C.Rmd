@@ -9,27 +9,63 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Make a Bison and  Cotton graph  for regen
-
+Packages
 ```{r}
-soc_regen_bison_cotton<- ggplot()+
-  geom_line(data = regen_data2, aes(x = Year, y = EndSOC))+
-  geom_line(data = regen, aes(x = Year, y = End_SOC))
-
-  soc_regen_bison_cotton
-
-
-
 
 ```
 
+Data
 ```{r}
-soc_regen_bison_cotton_mango<- ggplot()+
-  geom_line(data = regen_data2, aes(x = Year, y = EndSOC),col = "rosybrown")+
-  geom_line(data = regen, aes(x = Year, y = End_SOC), col = "blue")+
-  geom_line(data = regen_simple, aes(x = Year,y = End_SOC), col = "green")+
-  theme_bw()
 
-soc_regen_bison_cotton_mango
+```
+
+Graph #1 (Time Series SOC)
+```{r}
+
+```
+
+Graph #2 (Time Series GWP)
+```{r}
+
+```
+
+Graph #3 (Bar SOC & GWP)
+```{r}
+
+```
+
+Graph #4 (Bar N2O $ CH4)
+```{r}
+
+```
+
+Graph #5 (Bar Locatiuon)
+```{r}
+
+```
+
+Graph #6 (Bar Location)
+```{r}
+
+```
+
+Graph #7 (Bar compost/manure sensativity)
+```{r}
+
+```
+
+Graph #8 (Bar crop sensativity)
+```{r}
+
+```
+
+Graph #9 (Bar tillage sensativity)
+```{r}
+
+```
+
+Save Graphs as jpg
+```{r}
+
 ```
 
