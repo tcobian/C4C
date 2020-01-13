@@ -10,26 +10,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Packages
-```{r}
-
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
 ```
 
 Data
+```{r, include=FALSE}
+
+
+```
+
+Graph #1 (Time Series SOC) AI
 ```{r}
 
 ```
 
-Graph #1 (Time Series SOC)
+Graph #2 (Time Series GWP) AI
 ```{r}
 
 ```
 
-Graph #2 (Time Series GWP)
-```{r}
-
-```
-
-Graph #3 (Bar SOC & GWP)
+Graph #3 (Bar SOC & GWP) AI
 ```{r}
 
 ```
