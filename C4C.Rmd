@@ -13,6 +13,7 @@ Packages
 ```{r, include=FALSE}
 library(tidyverse)
 library(here)
+library(kableExtra)
 ```
 
 Data
