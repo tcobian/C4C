@@ -14,6 +14,7 @@ Packages
 library(tidyverse)
 library(here)
 library(kableExtra)
+
 ```
 
 Data
@@ -47,7 +48,41 @@ Graph #3 (Bar SOC & GWP) AI
 
 Graph #4 (Bar N2O $ CH4) TC
 ```{r}
+options(scipen = 999)
+# find the mean n2o and ch4 for regen and oragnic for each crop in the base site
+# base sites 
+# Kernza: Minnesota
+# Mango: Nicaragua
+# Cotton: Texas
+# Bison: Sputh Dakota
+kernza_regen_n2o<- mean(kernza$N2O_CO2e[55:72])
+kernza_organic_n2o<- mean(kernza$N2O_CO2e[37:54])
+kernza_regen_ch4<- mean(kernza$CH4_CO2e[55:72])
+kernza_organic_ch4<- mean(kernza$CH4_CO2e[37:54])
 
+mango_regen_n2o<- ((mean(mango$N2O_flux[37:54])/28)*66)*265
+mango_organic_n2o<- ((mean(mango$N2O_flux[55:72])/28)*66)*265
+mango_regen_ch4<- ((mean(mango$CH4[37:54])/12)*16)*28
+mango_organic_ch4<- ((mean(mango$CH4[55:72])/12)*16)*28
+
+cotton_regen_n2o<- mean(cotton$N2O[103:120])
+cotton_organic_n2o<- mean(cotton$CH4[23:40])
+cotton_regen_ch4<- mean(cotton$CH4[103:120])
+cotton_oragnic_ch4<- mean(cotton$CH4[23:40])
+
+bison_regen_n2o<- mean(bison$N2O_GWP[63:80])
+bison_organic_n2o<- mean(bison$N2O_GWP[43:60])
+bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
+bison_organic_ch4<- mean(bison$CH4_GWP[43:60])
+
+# make a data set of these averages
+
+n2o_ch4<- data.frame(Crop = c("Kernza", "Kernza", "Kernza", "Kernza", "Mango", "Mango","Mango", "Mango", "Cotton", "Cotton", "Cotton", "Cotton", "Bison", "Bison", "Bison", "Bison"),
+                   Pracitce = c("Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic"),
+                   Gas = c("N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4"),
+                   kg_co2e = c(kernza_regen_n2o, kernza_organic_n2o, kernza_regen_ch4, kernza_organic_ch4, mango_regen_n2o, mango_organic_n2o, mango_regen_ch4, mango_organic_ch4, cotton_regen_n2o, cotton_organic_n2o, cotton_regen_ch4, cotton_oragnic_ch4, bison_regen_n2o, bison_organic_n2o, bison_regen_ch4, bison_organic_ch4))
+
+# make a bar chart of the n2o_ch4 data frame
 ```
 
 Graph #5 (Bar Location) TC
