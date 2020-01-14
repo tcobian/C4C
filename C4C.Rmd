@@ -44,32 +44,32 @@ Graph #3 (Bar SOC & GWP) AI
 
 ```
 
-Graph #4 (Bar N2O $ CH4)
+Graph #4 (Bar N2O $ CH4) TC
 ```{r}
 
 ```
 
-Graph #5 (Bar Locatiuon)
+Graph #5 (Bar Location) TC
 ```{r}
 
 ```
 
-Graph #6 (Bar Location)
+Graph #6 (Bar Climate) TC
 ```{r}
 
 ```
 
-Graph #7 (Bar compost/manure sensativity)
+Graph #7 (Bar compost/manure sensativity) ID
 ```{r}
 
 ```
 
-Graph #8 (Bar crop sensativity)
+Graph #8 (Bar crop sensativity) ID
 ```{r}
 
 ```
 
-Graph #9 (Bar tillage sensativity)
+Graph #9 (Bar tillage sensativity) ID
 ```{r}
 
 ```
