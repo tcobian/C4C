@@ -87,7 +87,6 @@ ch4_n20_kernza<- n2o_ch4 %>%
   filter(Crop == "Kernza") %>% 
   group_by(Practice)
 
-
 ch4_n20_cotton<- n2o_ch4 %>% 
   filter(Crop == "Cotton") %>% 
   group_by(Practice)
@@ -99,22 +98,6 @@ ch4_n20_mango<- n2o_ch4 %>%
 ch4_n20_bison<- n2o_ch4 %>% 
   filter(Crop == "Bison") %>% 
   group_by(Practice)
-
-ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Crop, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  facet_wrap(~Practice)+
-  scale_fill_manual(values = c("deepskyblue2", "cadetblue4"))+
-  labs(title = "Regenerative", y = "kgCO2e", x = element_blank())+
-  theme_classic()
-ch4_n20_regen_plot
-
-ch4_n20_organic_plot<- ggplot(ch4_n2o_organic, aes(y = kg_co2e, x = Crop, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  facet_wrap(~Practice)+
-  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
-  labs(title = "Organic", y = "kgCO2e", x = element_blank())+
-  theme_classic()
-ch4_n20_organic_plot
 
 ggarrange(ch4_n20_regen_plot, ch4_n20_organic_plot)
 
