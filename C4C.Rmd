@@ -78,9 +78,38 @@ bison_organic_ch4<- mean(bison$CH4_GWP[43:60])
 # make a data set of these averages
 
 n2o_ch4<- data.frame(Crop = c("Kernza", "Kernza", "Kernza", "Kernza", "Mango", "Mango","Mango", "Mango", "Cotton", "Cotton", "Cotton", "Cotton", "Bison", "Bison", "Bison", "Bison"),
-                   Pracitce = c("Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic"),
+                   Practice = c("Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic"),
                    Gas = c("N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4", "N2O", "N2O", "CH4", "CH4"),
                    kg_co2e = c(kernza_regen_n2o, kernza_organic_n2o, kernza_regen_ch4, kernza_organic_ch4, mango_regen_n2o, mango_organic_n2o, mango_regen_ch4, mango_organic_ch4, cotton_regen_n2o, cotton_organic_n2o, cotton_regen_ch4, cotton_oragnic_ch4, bison_regen_n2o, bison_organic_n2o, bison_regen_ch4, bison_organic_ch4))
+
+ch4_n2o_regen<- n2o_ch4 %>% 
+  filter(Practice == "Regenerative")
+
+ch4_n2o_organic<- n2o_ch4 %>% 
+  filter(Practice == "Organic")
+
+
+par(mfrow = c(1,2))
+
+ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Gas, fill = Gas))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("darkgreen", "darkblue"))+
+  labs(title = "Regenerative", y = "kgCO2e", x = element_blank())+
+  theme_classic()
+ch4_n20_regen_plot
+
+ch4_n20_organic_plot<- ggplot(ch4_n2o_organic, aes(y = kg_co2e, x = Gas, fill = Gas))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("purple", "green"))+
+  labs(title = "Organic", y = "kgCO2e", x = element_blank())+
+  theme_classic()
+ch4_n20_organic_plot
+
+n2o_ch4_tot<- par(mfrow = c(1,2), ch4_n20_regen_plot, ch4_n20_organic_plot)
+n2o_ch4_tot
+
 
 # make a bar chart of the n2o_ch4 data frame
 ```
