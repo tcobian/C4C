@@ -165,18 +165,46 @@ Graph #6 (Bar Climate) TC
 
 ```
 
-Graph #7 (Bar compost/manure sensativity) ID
+Graph #7 (Bar compost/manure sensitivity) ID
+```{r}
+
+
+```
+
+Graph #8 (Bar crop sensitivity) ID
 ```{r}
 
 ```
 
-Graph #8 (Bar crop sensativity) ID
+Graph #9 (Bar tillage sensitivity) ID
 ```{r}
 
-```
+cotton_tillage<-cotton %>% 
+  filter(Practice=="Tillage"| Practice=="Regenerative")
 
-Graph #9 (Bar tillage sensativity) ID
-```{r}
+cotton_regen_india_nt<- cotton_tillage$End_SOC[60]-cotton_tillage$End_SOC[43]
+cotton_regen_china_nt<-cotton_tillage$End_SOC[20]-cotton_tillage$End_SOC[3]
+cotton_regen_texas_nt<-cotton_tillage$End_SOC[40]-cotton_tillage$End_SOC[23]
+cotton_regen_peru_nt<-cotton_tillage$End_SOC[80]-cotton_tillage$End_SOC[63]
+
+coton_till_india<-cotton_tillage$End_SOC[100]-cotton_tillage$End_SOC[83]
+coton_till_china<-cotton_tillage$End_SOC[120]-cotton_tillage$End_SOC[103]
+coton_till_texas<-cotton_tillage$End_SOC[160]-cotton_tillage$End_SOC[143]
+coton_till_peru<-cotton_tillage$End_SOC[140]-cotton_tillage$End_SOC[123]
+
+cotton_regen_india_nt<- cotton_tillage$GWP[60]-cotton_tillage$GWP[43]
+cotton_regen_china_nt<-cotton_tillage$GWP[20]-cotton_tillage$GWP[3]
+cotton_regen_texas_nt<-cotton_tillage$GWP[40]-cotton_tillage$GWP[23]
+cotton_regen_peru_nt<-cotton_tillage$GWP[80]-cotton_tillage$GWP[63]
+
+coton_till_india<-cotton_tillage$GWP[100]-cotton_tillage$GWP[83]
+coton_till_china<-cotton_tillage$GWP[120]-cotton_tillage$GWP[103]
+coton_till_texas<-cotton_tillage$GWP[160]-cotton_tillage$GWP[143]
+coton_till_peru<-cotton_tillage$GWP[140]-cotton_tillage$GWP[123]
+
+
+
+
 
 ```
 
