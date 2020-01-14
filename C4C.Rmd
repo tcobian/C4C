@@ -84,14 +84,16 @@ n2o_ch4<- data.frame(Crop = c("Kernza", "Kernza", "Kernza", "Kernza", "Mango", "
                    kg_co2e = c(kernza_regen_n2o, kernza_organic_n2o, kernza_regen_ch4, kernza_organic_ch4, mango_regen_n2o, mango_organic_n2o, mango_regen_ch4, mango_organic_ch4, cotton_regen_n2o, cotton_organic_n2o, cotton_regen_ch4, cotton_oragnic_ch4, bison_regen_n2o, bison_organic_n2o, bison_regen_ch4, bison_organic_ch4))
 
 ch4_n2o_regen<- n2o_ch4 %>% 
-  filter(Practice == "Regenerative")
+  filter(Practice == "Regenerative") %>% 
+  group_by(Practice)
 
 ch4_n2o_organic<- n2o_ch4 %>% 
-  filter(Practice == "Organic")
+  filter(Practice == "Organic") %>% 
+  group_by(Practice)
 
 
 
-ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Gas, fill = Gas))+
+ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Practice, fill = Gas))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
   scale_fill_manual(values = c("deepskyblue2", "cadetblue4"))+
@@ -99,7 +101,7 @@ ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Gas, fill = Gas)
   theme_classic()
 ch4_n20_regen_plot
 
-ch4_n20_organic_plot<- ggplot(ch4_n2o_organic, aes(y = kg_co2e, x = Gas, fill = Gas))+
+ch4_n20_organic_plot<- ggplot(ch4_n2o_organic, aes(y = kg_co2e, x = Practice, fill = Gas))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
   scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
