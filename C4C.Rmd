@@ -133,7 +133,9 @@ ch4_n20_bison_plot<- ggplot(ch4_n20_bison, aes(y = kg_co2e, x = Gas, fill = Gas)
   theme_classic()
 ch4_n20_bison_plot
 
-ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot)
+ch4_n2o_total<- plot(ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot))
+
+ch4_n2o_total
 
 # make a bar chart of the n2o_ch4 data frame
 ```
@@ -197,6 +199,7 @@ tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas
 
 Save Graphs as jpg
 ```{r}
+
 
 ```
 
