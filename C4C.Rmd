@@ -14,6 +14,7 @@ Packages
 library(tidyverse)
 library(here)
 library(kableExtra)
+library(ggpubr)
 
 ```
 
@@ -89,12 +90,11 @@ ch4_n2o_organic<- n2o_ch4 %>%
   filter(Practice == "Organic")
 
 
-par(mfrow = c(1,2))
 
 ch4_n20_regen_plot<- ggplot(ch4_n2o_regen, aes(y = kg_co2e, x = Gas, fill = Gas))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
-  scale_fill_manual(values = c("darkgreen", "darkblue"))+
+  scale_fill_manual(values = c("deepskyblue2", "cadetblue4"))+
   labs(title = "Regenerative", y = "kgCO2e", x = element_blank())+
   theme_classic()
 ch4_n20_regen_plot
@@ -102,14 +102,12 @@ ch4_n20_regen_plot
 ch4_n20_organic_plot<- ggplot(ch4_n2o_organic, aes(y = kg_co2e, x = Gas, fill = Gas))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
-  scale_fill_manual(values = c("purple", "green"))+
+  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
   labs(title = "Organic", y = "kgCO2e", x = element_blank())+
   theme_classic()
 ch4_n20_organic_plot
 
-n2o_ch4_tot<- par(mfrow = c(1,2), ch4_n20_regen_plot, ch4_n20_organic_plot)
-n2o_ch4_tot
-
+ggarrange(ch4_n20_regen_plot, ch4_n20_organic_plot)
 
 # make a bar chart of the n2o_ch4 data frame
 ```
