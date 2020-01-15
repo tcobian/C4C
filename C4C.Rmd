@@ -341,6 +341,13 @@ location_gwp_plots
 location_plots<- ggarrange(location_soc_plots, location_gwp_plots,
                            ncol = 2, nrow = 1)
 location_plots
+
+
+#### Try to make one data frame and one graph
+
+location_df<- data.frame(location = c("Scotland", "Scotland","Minnesota", "Minnesota", "Kansas", "Kansas", "China", "China","India", "India", "Texas", "Texas", "Peru", "Peru", "India", "India","Nicaragua", "Nicaragua", "South Dakota", "South Dakota","Brazil", "Brazil"),
+                         Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic"),
+                         SOC = c())
 ```
 
 Graph #6 (Bar Climate) TC
