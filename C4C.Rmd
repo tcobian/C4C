@@ -367,15 +367,15 @@ Graph #9 (Bar tillage sensitivity) ID
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
 
-cotton_regen_india_nt_s<- cotton_tillage$End_SOC[60]-cotton_tillage$End_SOC[43]
-cotton_regen_china_nt_s<-cotton_tillage$End_SOC[20]-cotton_tillage$End_SOC[3]
-cotton_regen_texas_nt_s<-cotton_tillage$End_SOC[40]-cotton_tillage$End_SOC[23]
-cotton_regen_peru_nt_s<-cotton_tillage$End_SOC[80]-cotton_tillage$End_SOC[63]
+cotton_regen_india_nt_s<- mean(cotton_tillage$End_SOC[60:41])
+cotton_regen_china_nt_s<-mean(cotton_tillage$End_SOC[20:1])
+cotton_regen_texas_nt_s<-mean(cotton_tillage$End_SOC[40:21])
+cotton_regen_peru_nt_s<-mean(cotton_tillage$End_SOC[80:61])
 
-cotton_till_india_s<-cotton_tillage$End_SOC[100]-cotton_tillage$End_SOC[83]
-cotton_till_china_s<-cotton_tillage$End_SOC[120]-cotton_tillage$End_SOC[103]
-cotton_till_texas_s<-cotton_tillage$End_SOC[160]-cotton_tillage$End_SOC[143]
-cotton_till_peru_s<-cotton_tillage$End_SOC[140]-cotton_tillage$End_SOC[123]
+cotton_till_india_s<-mean(cotton_tillage$End_SOC[100:81])
+cotton_till_china_s<-mean(cotton_tillage$End_SOC[120:101])
+cotton_till_texas_s<-mean(cotton_tillage$End_SOC[160:141])
+cotton_till_peru_s<-mean(cotton_tillage$End_SOC[140:121])
 
 
 bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
@@ -399,7 +399,7 @@ tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas
 
 tillage_SOC<- ggplot(tillage_data, aes(y = SOC, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  facet_wrap(~Country)+
+  facet_wrap(~Country, scales = "free")+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
   labs(y ="SOC(kg/ha)")+
   theme_classic()
