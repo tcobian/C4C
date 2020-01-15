@@ -176,17 +176,19 @@ kernza_location<- data.frame(Location = c("Scotland", "Scotland","Minnesota", "M
 # plotting
 
 kernza_location_soc_plot<- ggplot(kernza_location, aes(y = SOC, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Kernza", y = "kgSOC/ha", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = "kgSOC/ha", x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 kernza_location_soc_plot
 
 kernza_location_gwp_plot<- ggplot(kernza_location, aes(y = GWP, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Kernza", y = "kgco2e", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = "kgco2e", x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 kernza_location_gwp_plot
 
 #########
@@ -229,17 +231,19 @@ cotton_location<- data.frame(Location = c("China", "China","India", "India", "Te
 # Plotting
 
 cotton_location_soc_plot<- ggplot(cotton_location, aes(y = SOC, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Cotton", y = "kgSOC/ha", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 cotton_location_soc_plot
 
 cotton_location_gwp_plot<- ggplot(cotton_location, aes(y = GWP, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Cotton", y = "kgCO2e", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 cotton_location_gwp_plot
 
 #######
@@ -271,24 +275,74 @@ mango_location<- data.frame(Location = c("India", "India","Nicaragua", "Nicaragu
 # make the plots
 
 mango_location_soc_plot<- ggplot(mango_location, aes(y = SOC, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Mango", y = "kgSOC/ha", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = "kgSOC/ha", x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 mango_location_soc_plot
 
 mango_location_gwp_plot<- ggplot(mango_location, aes(y = GWP, x = Location, fill = Practice))+
-  geom_bar(stat = "identity", position = "dodge")+
-  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
-  labs(title = "Mango", y = "kgCO2e", x = "Location")+
-  theme_classic()
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = "kgCO2e", x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 mango_location_gwp_plot
 
+##################
+# Bison
+##################
 
+bison_sd_regen_soc<- sum(bison$End_SOC[63:80])
+bison_sd_organic_soc<- sum(bison$End_SOC[45:60])
 
+bison_bz_regen_soc<- sum(bison$End_SOC[23:40])
+bison_bz_organic_soc<- sum(bison$End_SOC[3:20])
 
+bison_sd_regen_gwp<- sum(bison$GWP[63:80])
+bison_sd_organic_gwp<- sum(bison$GWP[45:60])
 
+bison_bz_regen_gwp<- sum(bison$GWP[23:40])
+bison_bz_organic_gwp<- sum(bison$GWP[3:20])
 
+# make the dataset
+bison_location<- data.frame(Location = c("South Dakota", "South Dakota","Brazil", "Brazil"),
+                             Practice = c("Regenerative", "Organic","Regenerative", "Organic"),
+                             SOC = c(bison_sd_regen_soc, bison_sd_organic_soc, bison_bz_regen_soc, bison_bz_organic_soc),
+                           GWP = c(bison_sd_regen_gwp, bison_sd_organic_gwp, bison_bz_regen_gwp, bison_bz_organic_gwp))
+
+# make the plots
+
+bison_location_soc_plot<- ggplot(bison_location, aes(y = SOC, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+bison_location_soc_plot
+
+bison_location_gwp_plot<- ggplot(bison_location, aes(y = GWP, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+bison_location_gwp_plot
+
+# accumilate the plots
+location_soc_plots<- ggarrange(kernza_location_soc_plot, cotton_location_soc_plot, mango_location_soc_plot, bison_location_soc_plot)
+
+location_soc_plots
+
+location_gwp_plots<- ggarrange(kernza_location_gwp_plot, cotton_location_gwp_plot, mango_location_gwp_plot, bison_location_gwp_plot)
+
+location_soc_plots
+location_gwp_plots
+
+location_plots<- ggarrange(location_soc_plots, location_gwp_plots,
+                           ncol = 2, nrow = 1)
+location_plots
 ```
 
 Graph #6 (Bar Climate) TC
