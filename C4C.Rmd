@@ -142,6 +142,152 @@ ch4_n2o_total
 
 Graph #5 (Bar Location) TC
 ```{r}
+##############
+# Kernza
+#############
+##### SOC
+kernza_uk_regen_soc<- sum(kernza$End_SOC[1:18])
+kernza_uk_organic_soc<- sum(kernza$End_SOC[19:36])
+
+kernza_min_regen_soc<- sum(kernza$End_SOC[55:72])
+kernza_min_organic_soc<- sum(kernza$End_SOC[37:54])
+
+kernza_ks_regen_soc<- sum(kernza$End_SOC[91:108])
+kernza_ks_organic_soc<- sum(kernza$End_SOC[73:90])
+
+###### GWP
+
+kernza_uk_regen_gwp<- sum(kernza$GWP[1:18])
+kernza_uk_organic_gwp<- sum(kernza$GWP[19:36])
+
+kernza_min_regen_gwp<- sum(kernza$GWP[55:72])
+kernza_min_organic_gwp<- sum(kernza$GWP[37:54])
+
+kernza_ks_regen_gwp<- sum(kernza$GWP[91:108])
+kernza_ks_organic_gwp<- sum(kernza$GWP[73:90])
+
+# making the data set
+
+kernza_location<- data.frame(Location = c("Scotland", "Scotland","Minnesota", "Minnesota", "Kansas", "Kansas"),
+                             Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic"),
+                             SOC = c(kernza_uk_regen_soc, kernza_uk_organic_soc, kernza_min_regen_soc, kernza_min_organic_soc, kernza_ks_regen_soc, kernza_ks_organic_soc),
+                             GWP = c(kernza_uk_regen_gwp, kernza_uk_organic_gwp, kernza_min_regen_gwp, kernza_min_organic_gwp, kernza_ks_regen_gwp, kernza_ks_organic_gwp))
+
+# plotting
+
+kernza_location_soc_plot<- ggplot(kernza_location, aes(y = SOC, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Kernza", y = "kgSOC/ha", x = "Location")+
+  theme_classic()
+kernza_location_soc_plot
+
+kernza_location_gwp_plot<- ggplot(kernza_location, aes(y = GWP, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Kernza", y = "kgco2e", x = "Location")+
+  theme_classic()
+kernza_location_gwp_plot
+
+#########
+# Cotton
+########
+###### SOC
+cotton_china_regen_soc<- sum(cotton$End_SOC[83:100])
+cotton_china_organic_soc<- sum(cotton$End_SOC[3:20])
+
+cotton_india_regen_soc<- sum(cotton$End_SOC[123:140])
+cotton_india_organic_soc<- sum(cotton$End_SOC[43:60])
+
+cotton_texas_regen_soc<- sum(cotton$End_SOC[103:120])
+cotton_texas_organic_soc<- sum(cotton$End_SOC[23:40])
+
+cotton_peru_regen_soc<- sum(cotton$End_SOC[143:160])
+cotton_peru_organic_soc<- sum(cotton$End_SOC[63:80])
+
+######### GWP
+
+cotton_china_regen_gwp<- sum(cotton$GWP[83:100])
+cotton_china_organic_gwp<- sum(cotton$GWP[3:20])
+
+cotton_india_regen_gwp<- sum(cotton$GWP[123:140])
+cotton_india_organic_gwp<- sum(cotton$GWP[43:60])
+
+cotton_texas_regen_gwp<- sum(cotton$GWP[103:120])
+cotton_texas_organic_gwp<- sum(cotton$GWP[23:40])
+
+cotton_peru_regen_gwp<- sum(cotton$GWP[143:160])
+cotton_peru_organic_gwp<- sum(cotton$GWP[63:80])
+
+# Making the data set
+
+cotton_location<- data.frame(Location = c("China", "China","India", "India", "Texas", "Texas", "Peru", "Peru"),
+                             Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic"),
+                             SOC = c(cotton_china_regen_soc, cotton_china_organic_soc, cotton_india_regen_soc, cotton_india_organic_soc, cotton_texas_regen_soc, cotton_texas_organic_soc, cotton_peru_regen_soc, cotton_peru_organic_soc),
+                           GWP = c(cotton_china_regen_gwp, cotton_china_organic_gwp, cotton_india_regen_gwp, cotton_india_organic_gwp, cotton_texas_regen_gwp, cotton_texas_organic_gwp, cotton_peru_regen_gwp, cotton_peru_organic_gwp))
+
+# Plotting
+
+cotton_location_soc_plot<- ggplot(cotton_location, aes(y = SOC, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Cotton", y = "kgSOC/ha", x = "Location")+
+  theme_classic()
+cotton_location_soc_plot
+
+cotton_location_gwp_plot<- ggplot(cotton_location, aes(y = GWP, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Cotton", y = "kgCO2e", x = "Location")+
+  theme_classic()
+cotton_location_gwp_plot
+
+#######
+# Mango
+######
+######## SOC
+mango_india_regen_soc<- sum(mango$End_SOC[1:18])
+mango_india_organic_soc<- sum(mango$End_SOC[19:36])
+
+mango_nicaragua_regen_soc<- sum(mango$End_SOC[37:54])
+mango_nicaragua_organic_soc<- sum(mango$End_SOC[55:72])
+######## GWP
+
+mango_india_regen_gwp<- ((sum(mango$End_SOC[1:18])/12)*66) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*66)*265)
+
+mango_india_organic_gwp<- ((sum(mango$End_SOC[19:36])/12)*66) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*66)*265)
+
+mango_nicaragua_regen_gwp<- ((sum(mango$End_SOC[37:54])/12)*66) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*66)*265)
+
+mango_nicaragua_organic_gwp<- ((sum(mango$End_SOC[55:72])/12)*66) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*66)*265)
+  
+# Make the data set
+
+mango_location<- data.frame(Location = c("India", "India","Nicaragua", "Nicaragua"),
+                             Practice = c("Regenerative", "Organic","Regenerative", "Organic"),
+                             SOC = c(mango_india_regen_soc, mango_india_organic_soc, mango_nicaragua_regen_soc, mango_nicaragua_organic_soc),
+                           GWP = c(mango_india_regen_gwp, mango_india_organic_gwp, mango_nicaragua_regen_gwp, mango_nicaragua_organic_gwp))
+
+# make the plots
+
+mango_location_soc_plot<- ggplot(mango_location, aes(y = SOC, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Mango", y = "kgSOC/ha", x = "Location")+
+  theme_classic()
+mango_location_soc_plot
+
+mango_location_gwp_plot<- ggplot(mango_location, aes(y = GWP, x = Location, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge")+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Mango", y = "kgCO2e", x = "Location")+
+  theme_classic()
+mango_location_gwp_plot
+
+
+
+
+
 
 ```
 
