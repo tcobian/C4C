@@ -37,6 +37,10 @@ Graph #1 (Time Series SOC) AI
 
  # Creting data frames
 
+SOC <- data.frame(Location = c("Minnesota", "Minnesota","South Dakota", "South Dakota", "Texas", "Texas"," Nicaragua", "Nicaragua"),
+                  Practice = c("Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic"),
+                  End_SOC = c(kernza, kernza, bison, bison, cotton, cotton, mango, mango)) 
+                  
 kernza_regen_SOC <- kernza %>% 
   filter(Country == "US_MN",
          Practice == "Regen")
