@@ -19,7 +19,9 @@ library(ggpubr)
 ```
 
 Data
+
 ```{r, include=FALSE}
+
 cotton<- read_csv(here("DATA", "cotton_combined.csv"))
 kernza<- read_csv(here("DATA", "kernza_total.csv"))
 kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
@@ -29,33 +31,30 @@ bison<- read_csv(here("DATA", "bison_total.csv"))
 bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
 bison_comp<- read_csv(here("DATA", "bison_compiling_sensativity.csv"))
 bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
+all_data <- read_csv(here("DATA", "Total_Crops.csv"))
 
 ```
 
 Graph #1 (Time Series SOC) AI
 ```{r}
 
- # Creting data frames
+# Need to update 
 
-SOC <- data.frame(Location = c("Minnesota", "Minnesota","South Dakota", "South Dakota", "Texas", "Texas"," Nicaragua", "Nicaragua"),
-                  Practice = c("Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic"),
-                  End_SOC = c(kernza, kernza, bison, bison, cotton, cotton, mango, mango)) 
-                  
 kernza_regen_SOC <- kernza %>% 
-  filter(Country == "US_MN",
-         Practice == "Regen")
+  filter(Country == "Minnesota",
+         Practice == "Regenarative")
 
 kernza_organic_SOC <- kernza %>% 
-  filter(Country == "US_MN",
+  filter(Country == "Minnesota",
          Practice == "Organic")
 
 bison_regen_SOC <- bison %>% 
-  filter(site == "SD",
-         Practice == "regen")
+  filter(Country == "South Dakota",
+         Practice == "Regenerative")
 
 bison_organic_SOC <- bison %>% 
-  filter(site == "SD",
-         practice == "organic")
+  filter(Country == "South Dakota",
+         Practice == "Organic")
 
 cotton_regen_SOC <- cotton %>% 
   filter(Country == "Texas",
@@ -66,12 +65,12 @@ cotton_organic_SOC <- cotton %>%
          Practice == "Organic")
 
 mango_regen_SOC <- mango %>% 
-  filter(site == "Nicaragua",
-         practice == "regen")
+  filter(Site == "Nicaragua",
+         Practice == "Regenerative")
 
 mango_organic_SOC <- mango %>% 
-  filter(site == "Nicaragua",
-         practice == "organic")
+  filter(Site == "Nicaragua",
+         Practice == "Organic")
 
                    
 # Kernza Graph
