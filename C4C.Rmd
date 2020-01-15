@@ -35,6 +35,100 @@ bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
 Graph #1 (Time Series SOC) AI
 ```{r}
 
+ # Kernza Graph
+
+kernza_regen_SOC <- kernza %>% 
+  filter(Country == "US_MN",
+         Practice == "Regen")
+
+kernza_organic_SOC <- kernza %>% 
+  filter(Country == "US_MN",
+         Practice == "Organic")
+
+kernza_SOC <- ggplot()+
+  geom_line(data = kernza_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
+  geom_text(aes(x = 16, y = 135900, label = "Regenerative"))+
+  geom_line(data = kernza_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
+  geom_text(aes(x = 16, y = 135300, label = "Organic"))+
+  labs(title = "Difference between the total change in SOC between regenerative and organic\n practices in Minnesota",
+       y = "kg of Soil Organic Carbon per ha")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5)) # center the graph
+
+kernza_SOC
+
+# Bison Graph
+
+bison_regen_SOC <- bison %>% 
+  filter(site == "SD",
+         practice == "regen")
+
+bison_organic_SOC <- bison %>% 
+  filter(site == "SD",
+         practice == "organic")
+  
+bison_SOC <- ggplot()+
+  geom_line(data = bison_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
+  geom_text(aes(x = 16, y = 34000, label = "Regenerative"))+
+  geom_line(data = bison_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
+  geom_text(aes(x = 16, y = 30000, label = "Organic"))+
+  labs(title = "Difference between the total change in SOC between regenerative and organic\ngrazing practices in South Dakota",
+       y = "kg of Soil Organic Carbon per ha")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5)) # center the graph
+
+bison_SOC
+
+# Cotton Graph
+
+cotton_regen_SOC <- cotton %>% 
+  filter(Country == "Texas",
+         Practice == "Regenerative")
+
+cotton_organic_SOC <- cotton %>% 
+  filter(Country == "Texas",
+         Practice == "Organic")
+
+cotton_SOC <- ggplot ()+
+  geom_line(data = cotton_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
+  geom_text(aes(x = 16, y = 575000, label = "Regenerative"))+
+  geom_line(data = cotton_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
+  geom_text(aes(x = 16, y = 490000, label = "Organic"))+
+  labs(title = "Difference between the total change in SOC between regenerative and organic\n practices in Texas",
+       y = "kg of Soil Organic Carbon per ha")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5)) # center the graph
+
+cotton_SOC 
+
+# Mango Graph
+
+mango_regen_SOC <- mango %>% 
+  filter(site == "Nicaragua",
+         practice == "regen")
+
+mango_organic_SOC <- mango %>% 
+  filter(site == "Nicaragua",
+         practice == "organic")
+
+mango_SOC <- ggplot ()+
+  geom_line(data = mango_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
+  geom_text(aes(x = 16, y = 195000, label = "Regenerative"))+
+  geom_line(data = mango_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
+  geom_text(aes(x = 16, y = 130000, label = "Organic"))+
+  labs(title = "Difference between the total change in SOC between regenerative and organic\n practices in Nicaragua",
+       y = "kg of Soil Organic Carbon per ha")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5)) # center the graph
+
+mango_SOC
+
+#### NEED TO ADD  FACET WRAP ####
+
+SOC_plot <- plot(ggarrange(kernza_SOC, cotton_SOC, mango_SOC, bison_SOC))
+
+SOC_plot
+
 ```
 
 Graph #2 (Time Series GWP) AI
