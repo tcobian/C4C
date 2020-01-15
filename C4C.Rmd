@@ -99,8 +99,6 @@ ch4_n20_bison<- n2o_ch4 %>%
   filter(Crop == "Bison") %>% 
   group_by(Practice)
 
-ggarrange(ch4_n20_regen_plot, ch4_n20_organic_plot)
-
 ch4_n20_kernza_plot<- ggplot(ch4_n20_kernza, aes(y = kg_co2e, x = Gas, fill = Gas))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Practice)+
