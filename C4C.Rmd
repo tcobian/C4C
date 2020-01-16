@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Packages
 ```{r, include=FALSE}
-
 library(gridExtra)
 library(tidyverse)
 library(here)
@@ -135,6 +134,8 @@ mango_SOC <- ggplot ()+
 
 mango_SOC
 
+#### NEED TO ADD  FACET WRAP ####
+
 SOC_plot <- plot(ggarrange(kernza_SOC, cotton_SOC, mango_SOC, bison_SOC))
 
 SOC_plot
@@ -148,9 +149,9 @@ Graph #2 (Time Series GWP) AI
 # Kernza GWP
 kernza_gwp <- ggplot()+
   geom_line(data = kernza_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 150, label = 'Regenerative'))+
+  geom_text(aes(x = 8, y = 100, label = 'Regenerative'))+
   geom_line(data = kernza_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 50, label = 'Organic'))+
+  geom_text(aes(x = 4, y = 350, label = 'Organic'))+
   labs(title = "Kernza", y = "kgCO2e", x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -161,9 +162,9 @@ kernza_gwp
 
 bison_gwp <- ggplot()+
   geom_line(data = bison_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 1000, label = 'Regenerative'))+
+  geom_text(aes(x = 12, y = 3200, label = 'Regenerative'))+
   geom_line(data = bison_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = -300, label = 'Organic'))+
+  geom_text(aes(x = 4, y = 1300, label = 'Organic'))+
   labs(title = "Bison", y = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -174,9 +175,9 @@ bison_gwp
 
 cotton_gwp <- ggplot()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 55000, label = 'Regenerative'))+
+  geom_text(aes(x = 6, y = 50000, label = 'Regenerative'))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 86000, label = 'Organic'))+
+  geom_text(aes(x = 8, y = 60000, label = 'Organic'))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -187,9 +188,9 @@ cotton_gwp
 
 mango_gwp <- ggplot ()+
   geom_line(data = mango_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = -5000, label = 'Regenerative'))+
+  geom_text(aes(x = 12, y = 30000, label = 'Regenerative'))+
   geom_line(data = mango_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 22000, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 10000, label = 'Organic'))+
   labs(title = "Mango", y = "Kg CO2e")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -551,27 +552,27 @@ Graph #9 (Bar tillage sensitivity) ID
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
 
-cotton_regen_india_nt_s<- mean(cotton_tillage$End_SOC[60:41])
-cotton_regen_china_nt_s<-mean(cotton_tillage$End_SOC[20:1])
-cotton_regen_texas_nt_s<-mean(cotton_tillage$End_SOC[40:21])
-cotton_regen_peru_nt_s<-mean(cotton_tillage$End_SOC[80:61])
+cotton_regen_india_nt_s<- mean(cotton_tillage$End_SOC[60:43])
+cotton_regen_china_nt_s<-mean(cotton_tillage$End_SOC[20:3])
+cotton_regen_texas_nt_s<-mean(cotton_tillage$End_SOC[40:23])
+cotton_regen_peru_nt_s<-mean(cotton_tillage$End_SOC[80:63])
 
-cotton_till_india_s<-mean(cotton_tillage$End_SOC[100:81])
-cotton_till_china_s<-mean(cotton_tillage$End_SOC[120:101])
-cotton_till_texas_s<-mean(cotton_tillage$End_SOC[160:141])
-cotton_till_peru_s<-mean(cotton_tillage$End_SOC[140:121])
+cotton_till_india_s<-mean(cotton_tillage$End_SOC[100:83])
+cotton_till_china_s<-mean(cotton_tillage$End_SOC[120:103])
+cotton_till_texas_s<-mean(cotton_tillage$End_SOC[160:143])
+cotton_till_peru_s<-mean(cotton_tillage$End_SOC[140:123])
 
 
 bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
-cotton_regen_india_nt_g<- mean(cotton_tillage$GWP[60:43])
-cotton_regen_china_nt_g<-mean(cotton_tillage$GWP[20:3])
-cotton_regen_texas_nt_g<-mean(cotton_tillage$GWP[40:23])
-cotton_regen_peru_nt_g<-mean(cotton_tillage$GWP[80:63])
+cotton_regen_india_nt_g<- mean(all_data$GWP[217:234])
+cotton_regen_china_nt_g<-mean(all_data$GWP[181:198])
+cotton_regen_texas_nt_g<-mean(all_data$GWP[199:216])
+cotton_regen_peru_nt_g<-mean(all_data$GWP[235:252])
 
-cotton_till_india_g<-mean(cotton_tillage$GWP[100:83])
-cotton_till_china_g<-mean(cotton_tillage$GWP[120:103])
-cotton_till_texas_g<-mean(cotton_tillage$GWP[160:143])
-cotton_till_peru_g<-mean(cotton_tillage$GWP[140:123])
+cotton_till_india_g<-mean(all_data$GWP[325:342])
+cotton_till_china_g<-mean(all_data$GWP[477:494])
+cotton_till_texas_g<-mean(all_data$GWP[513:530])
+cotton_till_peru_g<-mean(all_data$GWP[495:512])
 
 tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas", "Texas","Peru", "Peru"),
                    Practice = c("Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage"),
