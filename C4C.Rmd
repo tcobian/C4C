@@ -135,8 +135,6 @@ mango_SOC <- ggplot ()+
 
 mango_SOC
 
-#### NEED TO ADD  FACET WRAP ####
-
 SOC_plot <- plot(ggarrange(kernza_SOC, cotton_SOC, mango_SOC, bison_SOC))
 
 SOC_plot
