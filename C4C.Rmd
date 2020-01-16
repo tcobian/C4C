@@ -40,37 +40,45 @@ Graph #1 (Time Series SOC) AI
 
 # Need to update 
 
-kernza_regen_SOC <- kernza %>% 
+kernza_regen_SOC <- all_data %>% 
   filter(Country == "Minnesota",
-         Practice == "Regenarative")
+         Practice == "Regenarative") %>% 
+         group_by(Practice)
 
-kernza_organic_SOC <- kernza %>% 
+kernza_organic_SOC <- all_data %>% 
   filter(Country == "Minnesota",
-         Practice == "Organic")
+         Practice == "Organic") %>% 
+        group_by(Practice)
 
-bison_regen_SOC <- bison %>% 
+bison_regen_SOC <- all_data %>% 
   filter(Country == "South Dakota",
-         Practice == "Regenerative")
+         Practice == "Regenerative") %>% 
+         group_by(Practice)
 
-bison_organic_SOC <- bison %>% 
+bison_organic_SOC <- all_data %>% 
   filter(Country == "South Dakota",
-         Practice == "Organic")
+         Practice == "Organic") %>% 
+         group_by(Practice)
 
-cotton_regen_SOC <- cotton %>% 
+cotton_regen_SOC <- all_data %>% 
   filter(Country == "Texas",
-         Practice == "Regenerative")
+         Practice == "Regenerative") %>% 
+         group_by(Practice)
 
-cotton_organic_SOC <- cotton %>% 
+cotton_organic_SOC <- all_data %>% 
   filter(Country == "Texas",
-         Practice == "Organic")
+         Practice == "Organic") %>% 
+         group_by(Practice)
 
-mango_regen_SOC <- mango %>% 
-  filter(Site == "Nicaragua",
-         Practice == "Regenerative")
+mango_regen_SOC <- all_data %>% 
+  filter(Country == "Nicaragua",
+         Practice == "Regenerative") %>% 
+         group_by(Practice)
 
-mango_organic_SOC <- mango %>% 
-  filter(Site == "Nicaragua",
-         Practice == "Organic")
+mango_organic_SOC <- all_data %>% 
+  filter(Country == "Nicaragua",
+         Practice == "Organic") %>% 
+         group_by(Practice)
 
                    
 # Kernza Graph
@@ -131,6 +139,7 @@ SOC_plot <- plot(ggarrange(kernza_SOC, cotton_SOC, mango_SOC, bison_SOC))
 
 SOC_plot
 
+
 ```
 
 Graph #2 (Time Series GWP) AI
@@ -186,6 +195,10 @@ mango_gwp <- ggplot ()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
 mango_gwp
+
+gwp_plot <- plot(ggarrange(kernza_gwp, cotton_gwp, mango_gwp, bison_gwp))
+
+gwp_plot
 
 
 ```
