@@ -43,7 +43,7 @@ Graph #1 (Time Series SOC) AI
 
 kernza_regen_SOC <- all_data %>% 
   filter(Country == "Minnesota",
-         Practice == "Regenarative") %>% 
+         Practice == "Regenerative") %>% 
          group_by(Practice)
 
 kernza_organic_SOC <- all_data %>% 
@@ -63,7 +63,7 @@ bison_organic_SOC <- all_data %>%
 
 cotton_regen_SOC <- all_data %>% 
   filter(Country == "Texas",
-         Practice == "Regenerative") %>% 
+         Practice == "Regenerativeerative") %>% 
          group_by(Practice)
 
 cotton_organic_SOC <- all_data %>% 
@@ -86,10 +86,10 @@ mango_organic_SOC <- all_data %>%
 
 kernza_SOC <- ggplot()+
   geom_line(data = kernza_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 135900, label = "Regenerative"))+
+  geom_text(aes(x = 16, y = 136000, label = "Regenerative"))+
   geom_line(data = kernza_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
   geom_text(aes(x = 16, y = 135300, label = "Organic"))+
-  labs(title = "Kernza", y = "kgCO2e/ha", x = element_blank())+
+  labs(title = "Kernza", y = "kgSOC/ha", x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -99,10 +99,10 @@ kernza_SOC
   
 bison_SOC <- ggplot()+
   geom_line(data = bison_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 34000, label = "Regenerative"))+
+  geom_text(aes(x = 16, y = 35000, label = "Regenerative"))+
   geom_line(data = bison_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
   geom_text(aes(x = 16, y = 30000, label = "Organic"))+
-  labs(title = "Bison", y = "kgCO2e/ha", x = element_blank())+
+  labs(title = "Bison", y = element_blank(), x = "Year")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -112,23 +112,23 @@ bison_SOC
 
 cotton_SOC <- ggplot ()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 575000, label = "Regenerative"))+
+  geom_text(aes(x = 13, y = 590000, label = "Regenerative"))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 490000, label = "Organic"))+
-  labs(title = "Cotton", y = "kgCO2e/ha", x = element_blank())+
+  geom_text(aes(x = 14, y = 500000, label = "Organic"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
-cotton_SOC 
+cotton_SOC
 
 # Mango Graph - figureout which file has gwp value
 
 mango_SOC <- ggplot ()+
   geom_line(data = mango_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 195000, label = "Regenerative"))+
+  geom_text(aes(x = 16, y = 210000, label = "Regenerative"))+
   geom_line(data = mango_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
   geom_text(aes(x = 16, y = 130000, label = "Organic"))+
-  labs(title = "Mango", y = "kgCO2e/ha")+
+  labs(title = "Mango", y = "kgSOC/ha")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -149,10 +149,10 @@ Graph #2 (Time Series GWP) AI
 # Kernza GWP
 kernza_gwp <- ggplot()+
   geom_line(data = kernza_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 6, y = 100, label = 'Regenerative'))+
+  geom_text(aes(x = 8, y = 100, label = 'Regenerative'))+
   geom_line(data = kernza_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 300, label = 'Organic'))+
-  labs(title = "Kernza", y = "kgCO2e")+
+  geom_text(aes(x = 4, y = 350, label = 'Organic'))+
+  labs(title = "Kernza", y = "kgCO2e", x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -162,10 +162,10 @@ kernza_gwp
 
 bison_gwp <- ggplot()+
   geom_line(data = bison_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 12, y = 2000, label = 'Regenerative'))+
+  geom_text(aes(x = 12, y = 3200, label = 'Regenerative'))+
   geom_line(data = bison_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 1000, label = 'Organic'))+
-  labs(title = "Bison", y = "Kg CO2e")+
+  geom_text(aes(x = 4, y = 1300, label = 'Organic'))+
+  labs(title = "Bison", y = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -175,10 +175,10 @@ bison_gwp
 
 cotton_gwp <- ggplot()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 12, y = 2000, label = 'Regenerative'))+
+  geom_text(aes(x = 6, y = 50000, label = 'Regenerative'))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 1000, label = 'Organic'))+
-  labs(title = "Cotton", y = "Kg CO2e")+
+  geom_text(aes(x = 8, y = 60000, label = 'Organic'))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
 
@@ -188,9 +188,9 @@ cotton_gwp
 
 mango_gwp <- ggplot ()+
   geom_line(data = mango_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 12, y = 2000, label = 'Regenerative'))+
+  geom_text(aes(x = 12, y = 30000, label = 'Regenerative'))+
   geom_line(data = mango_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 1000, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 10000, label = 'Organic'))+
   labs(title = "Mango", y = "Kg CO2e")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
