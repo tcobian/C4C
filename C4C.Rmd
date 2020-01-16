@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Packages
 ```{r, include=FALSE}
-install.packages("gridExtra")
 library(gridExtra)
 library(tidyverse)
 library(here)
@@ -421,13 +420,13 @@ mango_nicaragua_regen_soc<- sum(mango$End_SOC[37:54])
 mango_nicaragua_organic_soc<- sum(mango$End_SOC[55:72])
 ######## GWP
 
-mango_india_regen_gwp<- ((sum(mango$End_SOC[1:18])/12)*66) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*66)*265)
+mango_india_regen_gwp<- ((sum(mango$End_SOC[1:18])/12)*44) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*44)*265)
 
-mango_india_organic_gwp<- ((sum(mango$End_SOC[19:36])/12)*66) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*66)*265)
+mango_india_organic_gwp<- ((sum(mango$End_SOC[19:36])/12)*44) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*44)*265)
 
-mango_nicaragua_regen_gwp<- ((sum(mango$End_SOC[37:54])/12)*66) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*66)*265)
+mango_nicaragua_regen_gwp<- ((sum(mango$End_SOC[37:54])/12)*44) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*44)*265)
 
-mango_nicaragua_organic_gwp<- ((sum(mango$End_SOC[55:72])/12)*66) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*66)*265)
+mango_nicaragua_organic_gwp<- ((sum(mango$End_SOC[55:72])/12)*44) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*44)*265)
   
 # Make the data set
 
