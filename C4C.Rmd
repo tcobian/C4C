@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Packages
 ```{r, include=FALSE}
+install.packages("gridExtra")
+library(gridExtra)
 library(tidyverse)
 library(here)
 library(kableExtra)
@@ -297,6 +299,8 @@ ch4_n2o_total<- plot(ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20
 
 ch4_n2o_total
 
+grid.arrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot, ncol = 2, nrow = 2)
+
 # make a bar chart of the n2o_ch4 data frame
 ```
 
@@ -504,12 +508,27 @@ location_plots<- ggarrange(location_soc_plots, location_gwp_plots,
                            ncol = 2, nrow = 1)
 location_plots
 
+grid.arrange(location_soc_plots, location_gwp_plots, ncol = 2, nrow = 1)
+
 
 #### Try to make one data frame and one graph
 
-location_df<- data.frame(location = c("Scotland", "Scotland","Minnesota", "Minnesota", "Kansas", "Kansas", "China", "China","India", "India", "Texas", "Texas", "Peru", "Peru", "India", "India","Nicaragua", "Nicaragua", "South Dakota", "South Dakota","Brazil", "Brazil"),
-                         Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic"),
-                         SOC = c())
+location_df<- data.frame(Crop = c("Kernza", "Kernza", "Kernza", "Kernza", "Kernza", "Kernza", "Cotton", "Cotton","Cotton","Cotton","Cotton","Cotton","Cotton","Cotton", "Mango", "Mango", "Mango", "Mango", "Bison", "Bison", "Bison", "Bison"), 
+Location = c("Scotland", "Scotland","Minnesota", "Minnesota", "Kansas", "Kansas", "China", "China","India", "India", "Texas", "Texas", "Peru", "Peru", "India", "India","Nicaragua", "Nicaragua", "South Dakota", "South Dakota","Brazil", "Brazil"),
+                         Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic"),
+                         SOC = c(kernza_uk_regen_soc, kernza_uk_organic_soc, kernza_min_regen_soc, kernza_min_organic_soc, kernza_ks_regen_soc, kernza_ks_organic_soc, cotton_china_regen_soc, cotton_china_organic_soc, cotton_india_regen_soc, cotton_india_organic_soc, cotton_texas_regen_soc, cotton_texas_organic_soc, cotton_peru_regen_soc, cotton_peru_organic_soc, mango_india_regen_soc, mango_india_organic_soc, mango_nicaragua_regen_soc, mango_nicaragua_organic_soc, bison_sd_regen_soc, bison_sd_organic_soc, bison_bz_regen_soc, bison_bz_organic_soc),
+                         GWP = c(kernza_uk_regen_gwp, kernza_uk_organic_gwp, kernza_min_regen_gwp, kernza_min_organic_gwp, kernza_ks_regen_gwp, kernza_ks_organic_gwp, cotton_china_regen_gwp, cotton_china_organic_gwp, cotton_india_regen_gwp, cotton_india_organic_gwp, cotton_texas_regen_gwp, cotton_texas_organic_gwp, cotton_peru_regen_gwp, cotton_peru_organic_gwp, mango_india_regen_gwp, mango_india_organic_gwp, mango_nicaragua_regen_gwp, mango_nicaragua_organic_gwp, bison_sd_regen_gwp, bison_sd_organic_gwp, bison_bz_regen_gwp, bison_bz_organic_gwp)) %>% 
+  group_by(Practice)
+
+location_total_plot<- ggplot()+
+  geom_bar(data = location_df, aes(y = GWP, x = Location, fill = Practice), stat = "identity", position = "dodge", width = 0.5)+
+  geom_bar(data = location_df, aes(y = SOC, x = Location, fill = Practice), stat = "identity", position = "dodge", width = 0.5)+
+  facet_wrap(~ Crop)+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+location_total_plot
+  
+
 ```
 
 Graph #6 (Bar Climate) TC
