@@ -552,27 +552,29 @@ Graph #9 (Bar tillage sensitivity) ID
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
 
-cotton_regen_india_nt_s<- mean(cotton_tillage$End_SOC[60:43])
-cotton_regen_china_nt_s<-mean(cotton_tillage$End_SOC[20:3])
-cotton_regen_texas_nt_s<-mean(cotton_tillage$End_SOC[40:23])
-cotton_regen_peru_nt_s<-mean(cotton_tillage$End_SOC[80:63])
+cotton_regen_india_nt_s<- sum(cotton_tillage$dSOC[60:43])
+cotton_regen_china_nt_s<-sum(cotton_tillage$dSOC[20:3])
+cotton_regen_texas_nt_s<-sum(cotton_tillage$dSOC[40:23])
+cotton_regen_peru_nt_s<-sum(cotton_tillage$dSOC[80:63])
 
-cotton_till_india_s<-mean(cotton_tillage$End_SOC[100:83])
-cotton_till_china_s<-mean(cotton_tillage$End_SOC[120:103])
-cotton_till_texas_s<-mean(cotton_tillage$End_SOC[160:143])
-cotton_till_peru_s<-mean(cotton_tillage$End_SOC[140:123])
+cotton_till_india_s<-sum(cotton_tillage$dSOC[100:83])
+cotton_till_china_s<-sum(cotton_tillage$dSOC[120:103])
+cotton_till_texas_s<-sum(cotton_tillage$dSOC[160:143])
+cotton_till_peru_s<-sum(cotton_tillage$dSOC[140:123])
 
 
 bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
-cotton_regen_india_nt_g<- mean(all_data$GWP[217:234])
-cotton_regen_china_nt_g<-mean(all_data$GWP[181:198])
-cotton_regen_texas_nt_g<-mean(all_data$GWP[199:216])
-cotton_regen_peru_nt_g<-mean(all_data$GWP[235:252])
 
-cotton_till_india_g<-mean(all_data$GWP[325:342])
-cotton_till_china_g<-mean(all_data$GWP[477:494])
-cotton_till_texas_g<-mean(all_data$GWP[513:530])
-cotton_till_peru_g<-mean(all_data$GWP[495:512])
+
+cotton_regen_india_nt_g<- sum(all_data$GWP[217:234])
+cotton_regen_china_nt_g<-sum(all_data$GWP[181:198])
+cotton_regen_texas_nt_g<-sum(all_data$GWP[199:216])
+cotton_regen_peru_nt_g<-sum(all_data$GWP[235:252])
+
+cotton_till_india_g<-sum(all_data$GWP[325:342])
+cotton_till_china_g<-sum(all_data$GWP[477:494])
+cotton_till_texas_g<-sum(all_data$GWP[513:530])
+cotton_till_peru_g<-sum(all_data$GWP[495:512])
 
 tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas", "Texas","Peru", "Peru"),
                    Practice = c("Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage"),
@@ -584,9 +586,9 @@ tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas
 
 tillage_SOC<- ggplot(tillage_data, aes(y = SOC, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  facet_wrap(~Country, scales = "free")+
+  facet_wrap(~Country)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="SOC(kg/ha)")+
+  labs(y ="Total Change in SOC(kg/ha)")+
   theme_classic()
 
 tillage_SOC
