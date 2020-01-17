@@ -597,6 +597,27 @@ nutrient_GWP
 
 Graph #8 (Bar crop sensitivity) ID
 ```{r}
+cotton_mono_s<- sum(call_data$dSOC[361:378])
+cotton_two_s<-sum(all_data$dSOC[379:396])
+cotton_three_s<-sum(all_data$dSOC[397:414])
+cotton_four_s<-sum(all_data$dSOC[415:432])
+
+
+bison_mono_s<- sum(call_data$dSOC[60:43])
+bison_two_s<-sum(all_data$dSOC[20:3])
+bison_three_s<-sum(all_data$dSOC[40:23])
+bison_four_s<-sum(all_data$dSOC[80:63])
+
+mango_mono_s<- sum(call_data$dSOC[60:43])
+mango_two_s<-sum(all_data$dSOC[20:3])
+mango_three_s<-sum(all_data$dSOC[40:23])
+
+
+kernza_mono_s<- sum(call_data$dSOC[60:43])
+kernza_two_s<-sum(all_data$dSOC[20:3])
+kernza_three_s<-sum(all_data$dSOC[40:23])
+
+
 
 ```
 
