@@ -16,6 +16,7 @@ library(tidyverse)
 library(here)
 library(kableExtra)
 library(ggpubr)
+library(ggplot2)
 
 ```
 
@@ -26,7 +27,9 @@ Data
 cotton<- read_csv(here("DATA", "cotton_combined.csv"))
 kernza<- read_csv(here("DATA", "kernza_total.csv"))
 kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
+kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
 mango<- read_csv(here("DATA", "mango_total.csv"))
+mango_compost<-read_csv(here("DATA", "MANGO_nutr_sens.csv"))
 bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
 bison<- read_csv(here("DATA", "bison_total.csv"))
 bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
@@ -538,6 +541,57 @@ Graph #6 (Bar Climate) TC
 Graph #7 (Bar compost/manure sensitivity) ID
 ```{r}
 
+cotton_manure_s<- sum(cotton$dSOC[140:123])
+bison_compost_s<-sum(all_data$dSOC[585:602])
+kernza_compost_s<-sum(all_data$dSOC[55:72])
+mango_compost_s<-sum(mango_compost$dSOC[1:18])
+
+cotton_nomanure_s<-sum(cotton$dSOC[263:280])
+bison_nocompost_s<-sum(cotton_tillage$dSOC[120:103])
+mango_nocompost_s<-sum(mango_compost$dSOC[37:54])
+kernza_nocompost_s<-sum(kernza_compost$dSOC[3:20])
+
+
+cotton_manure_g<- sum(all_data$GWP[217:234])
+bison_compost_g<-sum(all_data$GWP[585:602])
+kernza_compost_g<-sum(all_data$GWP[55:72])
+mango_compost_g<-sum(mango_compost$GWP[1:18])
+
+cotton_nomanure_g<-sum(all_data$GWP[343:360])
+bison_nocompost_g<-sum(cotton_tillage$GWP[120:103])
+mango_nocompost_g<-sum(mango_compost$GWP[37:54])
+kernza_nocompost_g<-sum(kernza_compost$GWP[3:20])
+
+
+
+nutrient_data<- data.frame(Crop = c("Cotton", "Cotton", "Bison", "Bison", "Mango", "Mango","Kernza Wheat", "Kernza Wheat"),
+                   Practice = c("Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost"),
+                   GWP = c(cotton_manure_g, cotton_nomanure_g,bison_compost_g, bison_nocompost_g,mango_compost_g, mango_nocompost_g, kernza_compost_g, kernza_nocompost_g),
+                   SOC=c(cotton_manure_s, cotton_nomanure_s,bison_compost_s, bison_nocompost_s,mango_compost_s, mango_nocompost_s, kernza_compost_s, kernza_nocompost_s)) %>% 
+  group_by(Practice)
+
+
+nutrient_SOC<- ggplot(nutrient_data, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
+  labs(y ="Total Change in SOC(kg/ha)")+
+  theme_classic()
+
+nutrient_SOC
+
+
+nutrient_GWP<- ggplot(nutrient_data, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
+  labs(y ="kg CO2e/ha")+
+  theme_classic()
+
+nutrient_GWP
+
+              
+
 
 ```
 
@@ -592,6 +646,7 @@ tillage_SOC<- ggplot(tillage_data, aes(y = SOC, x = Practice, fill = Practice))+
   theme_classic()
 
 tillage_SOC
+
 
 tillage_GWP<- ggplot(tillage_data, aes(y = GWP, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
