@@ -16,6 +16,7 @@ library(tidyverse)
 library(here)
 library(kableExtra)
 library(ggpubr)
+library(ggplot2)
 
 ```
 
@@ -26,13 +27,18 @@ Data
 cotton<- read_csv(here("DATA", "cotton_combined.csv"))
 kernza<- read_csv(here("DATA", "kernza_total.csv"))
 kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
+kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
 mango<- read_csv(here("DATA", "mango_total.csv"))
+mango_compost<-read_csv(here("DATA", "MANGO_nutr_sens.csv"))
 bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
 bison<- read_csv(here("DATA", "bison_total.csv"))
 bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
 bison_comp<- read_csv(here("DATA", "bison_compiling_sensativity.csv"))
 bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
 all_data <- read_csv(here("DATA", "Total_Crops.csv"))
+bison_nocompost<- read_csv(here("DATA", "regen_sd_no_compost.csv"))
+bison_crop<-read_csv(here("DATA", "bison_compiling_sensativity.csv"))
+
 
 ```
 
@@ -149,9 +155,9 @@ Graph #2 (Time Series GWP) AI
 # Kernza GWP
 kernza_gwp <- ggplot()+
   geom_line(data = kernza_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 8, y = 100, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = 130, label = 'Regenerative'))+
   geom_line(data = kernza_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 350, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 80, label = 'Organic'))+
   labs(title = "Kernza", y = "kgCO2e", x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -162,9 +168,9 @@ kernza_gwp
 
 bison_gwp <- ggplot()+
   geom_line(data = bison_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 12, y = 3200, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = 1000, label = 'Regenerative'))+
   geom_line(data = bison_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 4, y = 1300, label = 'Organic'))+
+  geom_text(aes(x = 16, y = -300, label = 'Organic'))+
   labs(title = "Bison", y = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -175,9 +181,9 @@ bison_gwp
 
 cotton_gwp <- ggplot()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 6, y = 50000, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = 60000, label = 'Regenerative'))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 8, y = 60000, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 80000, label = 'Organic'))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -188,9 +194,9 @@ cotton_gwp
 
 mango_gwp <- ggplot ()+
   geom_line(data = mango_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 12, y = 30000, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = -10000, label = 'Regenerative'))+
   geom_line(data = mango_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 10000, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 22000, label = 'Organic'))+
   labs(title = "Mango", y = "Kg CO2e")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -541,11 +547,103 @@ Graph #6 (Bar Climate) TC
 Graph #7 (Bar compost/manure sensitivity) ID
 ```{r}
 
+cotton_manure_s<- sum(all_data$dSOC[217:234])
+bison_compost_s<-sum(all_data$dSOC[585:602])
+kernza_compost_s<-sum(all_data$dSOC[55:72])
+mango_compost_s<-sum(mango_compost$dSOC[1:18])
+
+cotton_nomanure_s<-sum(all_data$dSOC[343:360])
+bison_nocompost_s<-sum(bison_nocompost$dSOC[3:20])
+kernza_nocompost_s<-sum(kernza_compost$dSOC[3:20])
+mango_nocompost_s<-sum(mango_compost$dSOC[37:54])
+
+
+cotton_manure_g<- sum(all_data$GWP[217:234])
+bison_compost_g<-sum(all_data$GWP[585:602])
+kernza_compost_g<-sum(all_data$GWP[55:72])
+mango_compost_g<-sum(mango_compost$GWP[1:18])
+
+cotton_nomanure_g<-sum(all_data$GWP[343:360])
+bison_nocompost_g<-sum(bison_nocompost$GWP[3:20])
+kernza_nocompost_g<-sum(kernza_compost$GWP[3:20])
+mango_nocompost_g<-sum(mango_compost$GWP[37:54])
+
+
+
+
+nutrient_data<- data.frame(Crop = c("Cotton", "Cotton", "Bison", "Bison", "Mango", "Mango","Kernza Wheat", "Kernza Wheat"),
+                   Practice = c("Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost"),
+                   GWP = c(cotton_manure_g, cotton_nomanure_g,bison_compost_g, bison_nocompost_g,mango_compost_g, mango_nocompost_g, kernza_compost_g, kernza_nocompost_g),
+                   SOC=c(cotton_manure_s, cotton_nomanure_s,bison_compost_s, bison_nocompost_s,mango_compost_s, mango_nocompost_s, kernza_compost_s, kernza_nocompost_s)) %>% 
+  group_by(Practice)
+
+
+nutrient_SOC<- ggplot(nutrient_data, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
+  labs(y ="Total Change in SOC(kg/ha)")+
+  theme_classic()
+
+nutrient_SOC
+
+
+nutrient_GWP<- ggplot(nutrient_data, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  facet_wrap(~Crop)+
+  scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
+  labs(y ="kg CO2e/ha")+
+  theme_classic()
+
+nutrient_GWP
+
+              
+
 
 ```
 
 Graph #8 (Bar crop sensitivity) ID
 ```{r}
+cotton_mono_s<- sum(all_data$dSOC[361:378])
+cotton_two_s<-sum(all_data$dSOC[379:396])
+cotton_three_s<-sum(all_data$dSOC[397:414])
+cotton_four_s<-sum(all_data$dSOC[415:432])
+cotton_regen_india_s<- sum(all_data$dSOC[217:234])
+
+
+bison_mono_s<- sum(bison_crop$dSOC[60:43])
+bison_two_s<-sum(bison_crop$dSOC[20:3])
+bison_three_s<-sum(bison_crop$dSOC[40:23])
+bison_four_s<-sum(bison_crop$dSOC[80:63])
+bison_sd_s<- sum(all_data$dSOC[585:602])
+
+mango_mono_s<- sum(call_data$dSOC[60:43])
+mango_two_s<-sum(all_data$dSOC[20:3])
+mango_three_s<-sum(all_data$dSOC[40:23])
+
+
+kernza_mono_s<- sum(call_data$dSOC[60:43])
+kernza_two_s<-sum(all_data$dSOC[20:3])
+kernza_three_s<-sum(all_data$dSOC[40:23])
+
+
+cotton_mono_g<- sum(all_data$GWP[361:378])
+cotton_two_g<-sum(all_data$GWP[379:396])
+cotton_three_g<-sum(all_data$GWP[397:414])
+cotton_four_g<-sum(all_data$GWP[415:432])
+cotton_regen_india_g<- sum(all_data$GWP[217:234])
+
+
+bison_mono_g<- sum(bison_crop$GWP[60:43])
+bison_two_g<-sum(bison_crop$GWP[20:3])
+bison_three_g<-sum(bison_crop$GWP[40:23])
+bison_four_g<-sum(bison_crop$GWP[80:63])
+bison_sd_g<- sum(all_data$GWP[585:602])
+
+mango_mono_s<- sum(all_data$GWP[60:43])
+mango_two_s<-sum(all_data$GWP[20:3])
+mango_three_s<-sum(all_data$GWP[40:23])
+
 
 ```
 
@@ -555,27 +653,31 @@ Graph #9 (Bar tillage sensitivity) ID
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
 
-cotton_regen_india_nt_s<- mean(cotton_tillage$End_SOC[60:43])
-cotton_regen_china_nt_s<-mean(cotton_tillage$End_SOC[20:3])
-cotton_regen_texas_nt_s<-mean(cotton_tillage$End_SOC[40:23])
-cotton_regen_peru_nt_s<-mean(cotton_tillage$End_SOC[80:63])
 
-cotton_till_india_s<-mean(cotton_tillage$End_SOC[100:83])
-cotton_till_china_s<-mean(cotton_tillage$End_SOC[120:103])
-cotton_till_texas_s<-mean(cotton_tillage$End_SOC[160:143])
-cotton_till_peru_s<-mean(cotton_tillage$End_SOC[140:123])
+
+cotton_regen_india_nt_s<- sum(all_data$dSOC[217:234])
+cotton_regen_china_nt_s<-sum(all_data$dSOC[181:198])
+cotton_regen_texas_nt_s<-sum(all_data$dSOC[199:216])
+cotton_regen_peru_nt_s<-sum(all_data$dSOC[235:252])
+
+cotton_till_india_s<-sum(all_data$dSOC[325:342])
+cotton_till_china_s<-sum(all_data$dSOC[477:494])
+cotton_till_texas_s<-sum(all_data$dSOC[513:530])
+cotton_till_peru_s<-sum(all_data$dSOC[495:512])
 
 
 bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
-cotton_regen_india_nt_g<- mean(all_data$GWP[217:234])
-cotton_regen_china_nt_g<-mean(all_data$GWP[181:198])
-cotton_regen_texas_nt_g<-mean(all_data$GWP[199:216])
-cotton_regen_peru_nt_g<-mean(all_data$GWP[235:252])
 
-cotton_till_india_g<-mean(all_data$GWP[325:342])
-cotton_till_china_g<-mean(all_data$GWP[477:494])
-cotton_till_texas_g<-mean(all_data$GWP[513:530])
-cotton_till_peru_g<-mean(all_data$GWP[495:512])
+
+cotton_regen_india_nt_g<- sum(all_data$GWP[217:234])
+cotton_regen_china_nt_g<-sum(all_data$GWP[181:198])
+cotton_regen_texas_nt_g<-sum(all_data$GWP[199:216])
+cotton_regen_peru_nt_g<-sum(all_data$GWP[235:252])
+
+cotton_till_india_g<-sum(all_data$GWP[325:342])
+cotton_till_china_g<-sum(all_data$GWP[477:494])
+cotton_till_texas_g<-sum(all_data$GWP[513:530])
+cotton_till_peru_g<-sum(all_data$GWP[495:512])
 
 tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas", "Texas","Peru", "Peru"),
                    Practice = c("Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage"),
@@ -587,12 +689,13 @@ tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas
 
 tillage_SOC<- ggplot(tillage_data, aes(y = SOC, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  facet_wrap(~Country, scales = "free")+
+  facet_wrap(~Country)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="SOC(kg/ha)")+
+  labs(y ="Total Change in SOC(kg/ha)")+
   theme_classic()
 
 tillage_SOC
+
 
 tillage_GWP<- ggplot(tillage_data, aes(y = GWP, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
