@@ -520,20 +520,134 @@ Graph #6 (Bar Climate) TC
 ```{r}
 
 cotton_india_regen_soc
-cotton_nc_regen_nc<- sum(all_data$dSOC[307:324])
+cotton_nc_regen_soc<- sum(all_data$dSOC[307:324])
+cotton_climate<- data.frame(Practice = c("Regenerative", "Regenerative"),
+                            Climate = c("India", "No Climate"),
+                            SOC = c(cotton_india_regen_soc, cotton_nc_regen_soc))
 
 
 kernza_min_regen_soc
 kernza_min_organic_soc
 kernza_nc_regen_soc<- sum(kernza_updated$dSOC[127:144])
 kernza_nc_organic_soc<- sum(kernza_updated$dSOC[109:126])
+kernza_climate<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("Minnesota", "No Climate", "Minnesota", "No Climate"),
+                            SOC = c(kernza_min_regen_soc, kernza_nc_regen_soc, kernza_min_organic_soc, kernza_nc_organic_soc))
 
 mango_nicaragua_regen_soc
 mango_nicaragua_organic_soc
 mango_nc_regen_soc<- sum(mango_nc$dSOC[63:80])
 mango_nc_organic_soc<- sum(mango_nc$dSOC[43:60])
+mango_climate<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("Nicaragua", "No Climate", "Nicaragua", "No Climate"),
+                            SOC = c(mango_nicaragua_regen_soc, mango_nc_regen_soc, mango_nicaragua_organic_soc, mango_nc_organic_soc))
+
+bison_sd_regen_soc
+bison_sd_organic_soc
+bison_nc_regen_soc<- sum(bison_nc$dSOC[3:20])
+bison_nc_organic_soc<- sum(bison_nc$dSOC[23:40])
+bison_climate<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("South Dakota", "No Climate", "South Dakota", "No Climate"),
+                            SOC = c(bison_sd_regen_soc, bison_nc_regen_soc, bison_sd_organic_soc, bison_nc_organic_soc))
+
+# Make the plot for the differen crops for SOC
+
+kernza_climate_soc_plot<- ggplot(kernza_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = "kgSOC/ha", x = element_blank())+
+  theme_classic()
+kernza_climate_soc_plot
+
+cotton_climate_soc_plot<- ggplot(cotton_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()
+cotton_climate_soc_plot
+
+mango_climate_soc_plot<- ggplot(mango_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = "kgSOC/ha", x = element_blank())+
+  theme_classic()
+mango_climate_soc_plot
+
+
+bison_climate_soc_plot<- ggplot(bison_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()
+bison_climate_soc_plot
+
+ggarrange(kernza_climate_soc_plot, cotton_climate_soc_plot, mango_climate_soc_plot, bison_climate_soc_plot)
   
 
+###### Do the same for GWP
+
+cotton_india_regen_gwp
+cotton_nc_regen_gwp<- sum(all_data$GWP[307:324])
+cotton_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative"),
+                            Climate = c("India", "No Climate"),
+                            GWP = c(cotton_india_regen_gwp, cotton_nc_regen_gwp))
+
+
+kernza_min_regen_gwp
+kernza_min_organic_gwp
+kernza_nc_regen_gwp<- sum(kernza_updated$GWP[127:144])
+kernza_nc_organic_gwp<- sum(kernza_updated$GWP[109:126])
+kernza_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("Minnesota", "No Climate", "Minnesota", "No Climate"),
+                            GWP = c(kernza_min_regen_gwp, kernza_nc_regen_gwp, kernza_min_organic_gwp, kernza_nc_organic_gwp))
+
+mango_nicaragua_regen_gwp
+mango_nicaragua_organic_gwp
+mango_nc_regen_gwp<- sum(mango_nc$GWP[63:80])
+mango_nc_organic_gwp<- sum(mango_nc$GWP[43:60])
+mango_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("Nicaragua", "No Climate", "Nicaragua", "No Climate"),
+                            GWP = c(mango_nicaragua_regen_gwp, mango_nc_regen_gwp, mango_nicaragua_organic_gwp, mango_nc_organic_gwp))
+
+bison_sd_regen_gwp
+bison_sd_organic_gwp
+bison_nc_regen_gwp<- sum(bison_nc$GWP[3:20])
+bison_nc_organic_gwp<- sum(bison_nc$GWP[23:40])
+bison_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("South Dakota", "No Climate", "South Dakota", "No Climate"),
+                            GWP = c(bison_sd_regen_gwp, bison_nc_regen_gwp, bison_sd_organic_gwp, bison_nc_organic_gwp))
+
+
+# now make the plots for climate sensativity on GWP
+
+kernza_climate_gwp_plot<- ggplot(kernza_climate_gwp, aes(y = GWP, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = "kgCO2e/ha", x = element_blank())+
+  theme_classic()
+kernza_climate_gwp_plot
+
+cotton_climate_gwp_plot<- ggplot(cotton_climate_gwp, aes(y = GWP, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()
+cotton_climate_gwp_plot
+
+mango_climate_soc_plot<- ggplot(mango_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = "kgSOC/ha", x = element_blank())+
+  theme_classic()
+mango_climate_soc_plot
+
+
+bison_climate_soc_plot<- ggplot(bison_climate, aes(y = SOC, x = Climate, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()
+bison_climate_soc_plot
 
 ```
 
