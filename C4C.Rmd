@@ -36,6 +36,9 @@ bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
 bison_comp<- read_csv(here("DATA", "bison_compiling_sensativity.csv"))
 bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
 all_data <- read_csv(here("DATA", "Total_Crops.csv"))
+bison_nocompost<- read_csv(here("DATA", "regen_sd_no_compost.csv"))
+bison_crop<-read_csv(here("DATA", "bison_compiling_sensativity.csv"))
+
 
 ```
 
@@ -541,15 +544,15 @@ Graph #6 (Bar Climate) TC
 Graph #7 (Bar compost/manure sensitivity) ID
 ```{r}
 
-cotton_manure_s<- sum(cotton$dSOC[140:123])
+cotton_manure_s<- sum(all_data$dSOC[217:234])
 bison_compost_s<-sum(all_data$dSOC[585:602])
 kernza_compost_s<-sum(all_data$dSOC[55:72])
 mango_compost_s<-sum(mango_compost$dSOC[1:18])
 
-cotton_nomanure_s<-sum(cotton$dSOC[263:280])
-bison_nocompost_s<-sum(cotton_tillage$dSOC[120:103])
-mango_nocompost_s<-sum(mango_compost$dSOC[37:54])
+cotton_nomanure_s<-sum(all_data$dSOC[343:360])
+bison_nocompost_s<-sum(bison_nocompost$dSOC[3:20])
 kernza_nocompost_s<-sum(kernza_compost$dSOC[3:20])
+mango_nocompost_s<-sum(mango_compost$dSOC[37:54])
 
 
 cotton_manure_g<- sum(all_data$GWP[217:234])
@@ -558,9 +561,10 @@ kernza_compost_g<-sum(all_data$GWP[55:72])
 mango_compost_g<-sum(mango_compost$GWP[1:18])
 
 cotton_nomanure_g<-sum(all_data$GWP[343:360])
-bison_nocompost_g<-sum(cotton_tillage$GWP[120:103])
-mango_nocompost_g<-sum(mango_compost$GWP[37:54])
+bison_nocompost_g<-sum(bison_nocompost$GWP[3:20])
 kernza_nocompost_g<-sum(kernza_compost$GWP[3:20])
+mango_nocompost_g<-sum(mango_compost$GWP[37:54])
+
 
 
 
@@ -597,16 +601,18 @@ nutrient_GWP
 
 Graph #8 (Bar crop sensitivity) ID
 ```{r}
-cotton_mono_s<- sum(call_data$dSOC[361:378])
+cotton_mono_s<- sum(all_data$dSOC[361:378])
 cotton_two_s<-sum(all_data$dSOC[379:396])
 cotton_three_s<-sum(all_data$dSOC[397:414])
 cotton_four_s<-sum(all_data$dSOC[415:432])
+cotton_regen_india_s<- sum(all_data$dSOC[217:234])
 
 
-bison_mono_s<- sum(call_data$dSOC[60:43])
-bison_two_s<-sum(all_data$dSOC[20:3])
-bison_three_s<-sum(all_data$dSOC[40:23])
-bison_four_s<-sum(all_data$dSOC[80:63])
+bison_mono_s<- sum(bison_crop$dSOC[60:43])
+bison_two_s<-sum(bison_crop$dSOC[20:3])
+bison_three_s<-sum(bison_crop$dSOC[40:23])
+bison_four_s<-sum(bison_crop$dSOC[80:63])
+bison_sd_s<- sum(all_data$dSOC[585:602])
 
 mango_mono_s<- sum(call_data$dSOC[60:43])
 mango_two_s<-sum(all_data$dSOC[20:3])
@@ -618,6 +624,23 @@ kernza_two_s<-sum(all_data$dSOC[20:3])
 kernza_three_s<-sum(all_data$dSOC[40:23])
 
 
+cotton_mono_g<- sum(all_data$GWP[361:378])
+cotton_two_g<-sum(all_data$GWP[379:396])
+cotton_three_g<-sum(all_data$GWP[397:414])
+cotton_four_g<-sum(all_data$GWP[415:432])
+cotton_regen_india_g<- sum(all_data$GWP[217:234])
+
+
+bison_mono_g<- sum(bison_crop$GWP[60:43])
+bison_two_g<-sum(bison_crop$GWP[20:3])
+bison_three_g<-sum(bison_crop$GWP[40:23])
+bison_four_g<-sum(bison_crop$GWP[80:63])
+bison_sd_g<- sum(all_data$GWP[585:602])
+
+mango_mono_s<- sum(all_data$GWP[60:43])
+mango_two_s<-sum(all_data$GWP[20:3])
+mango_three_s<-sum(all_data$GWP[40:23])
+
 
 ```
 
@@ -627,15 +650,17 @@ Graph #9 (Bar tillage sensitivity) ID
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
 
-cotton_regen_india_nt_s<- sum(cotton_tillage$dSOC[60:43])
-cotton_regen_china_nt_s<-sum(cotton_tillage$dSOC[20:3])
-cotton_regen_texas_nt_s<-sum(cotton_tillage$dSOC[40:23])
-cotton_regen_peru_nt_s<-sum(cotton_tillage$dSOC[80:63])
 
-cotton_till_india_s<-sum(cotton_tillage$dSOC[100:83])
-cotton_till_china_s<-sum(cotton_tillage$dSOC[120:103])
-cotton_till_texas_s<-sum(cotton_tillage$dSOC[160:143])
-cotton_till_peru_s<-sum(cotton_tillage$dSOC[140:123])
+
+cotton_regen_india_nt_s<- sum(all_data$dSOC[217:234])
+cotton_regen_china_nt_s<-sum(all_data$dSOC[181:198])
+cotton_regen_texas_nt_s<-sum(all_data$dSOC[199:216])
+cotton_regen_peru_nt_s<-sum(all_data$dSOC[235:252])
+
+cotton_till_india_s<-sum(all_data$dSOC[325:342])
+cotton_till_china_s<-sum(all_data$dSOC[477:494])
+cotton_till_texas_s<-sum(all_data$dSOC[513:530])
+cotton_till_peru_s<-sum(all_data$dSOC[495:512])
 
 
 bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
