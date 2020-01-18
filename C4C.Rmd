@@ -219,25 +219,25 @@ options(scipen = 999)
 # Mango: Nicaragua
 # Cotton: Texas
 # Bison: Sputh Dakota
-kernza_regen_n2o<- mean(kernza$N2O_CO2e[55:72])
-kernza_organic_n2o<- mean(kernza$N2O_CO2e[37:54])
-kernza_regen_ch4<- mean(kernza$CH4_CO2e[55:72])
-kernza_organic_ch4<- mean(kernza$CH4_CO2e[37:54])
+kernza_regen_n2o<- sum(kernza$N2O_CO2e[55:72])
+kernza_organic_n2o<- sum(kernza$N2O_CO2e[37:54])
+kernza_regen_ch4<- sum(kernza$CH4_CO2e[55:72])
+kernza_organic_ch4<- sum(kernza$CH4_CO2e[37:54])
 
-mango_regen_n2o<- ((mean(mango$N2O_flux[37:54])/28)*66)*265
-mango_organic_n2o<- ((mean(mango$N2O_flux[55:72])/28)*66)*265
-mango_regen_ch4<- ((mean(mango$CH4[37:54])/12)*16)*28
-mango_organic_ch4<- ((mean(mango$CH4[55:72])/12)*16)*28
+mango_regen_n2o<- ((sum(mango$N2O_flux[37:54])/28)*66)*265
+mango_organic_n2o<- ((sum(mango$N2O_flux[55:72])/28)*66)*265
+mango_regen_ch4<- ((sum(mango$CH4[37:54])/12)*16)*28
+mango_organic_ch4<- ((sum(mango$CH4[55:72])/12)*16)*28
 
-cotton_regen_n2o<- mean(cotton$N2O[103:120])
-cotton_organic_n2o<- mean(cotton$CH4[23:40])
-cotton_regen_ch4<- mean(cotton$CH4[103:120])
-cotton_oragnic_ch4<- mean(cotton$CH4[23:40])
+cotton_regen_n2o<- sum(cotton$N2O[103:120])
+cotton_organic_n2o<- sum(cotton$CH4[23:40])
+cotton_regen_ch4<- sum(cotton$CH4[103:120])
+cotton_oragnic_ch4<- sum(cotton$CH4[23:40])
 
-bison_regen_n2o<- mean(bison$N2O_GWP[63:80])
-bison_organic_n2o<- mean(bison$N2O_GWP[43:60])
-bison_regen_ch4<- mean(bison$CH4_GWP[63:80])
-bison_organic_ch4<- mean(bison$CH4_GWP[43:60])
+bison_regen_n2o<- sum(bison$N2O_GWP[63:80])
+bison_organic_n2o<- sum(bison$N2O_GWP[43:60])
+bison_regen_ch4<- sum(bison$CH4_GWP[63:80])
+bison_organic_ch4<- sum(bison$CH4_GWP[43:60])
 
 # make a data set of these averages
 
@@ -301,6 +301,9 @@ ch4_n2o_total
 grid.arrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot, ncol = 2, nrow = 2)
 
 # make a bar chart of the n2o_ch4 data frame
+
+# Perform t-test on the bar chart to test fro significance
+
 ```
 
 Graph #5 (Bar Location) TC
