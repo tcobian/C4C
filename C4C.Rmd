@@ -30,6 +30,7 @@ kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
 kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
 mango<- read_csv(here("DATA", "mango_total.csv"))
 mango_compost<-read_csv(here("DATA", "MANGO_nutr_sens.csv"))
+mango_nc<- read_csv(here("DATA", "MANGO_total_noclimate.csv"))
 bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
 bison<- read_csv(here("DATA", "bison_total.csv"))
 bison_indi<- read_csv(here("DATA", "bison_individual_sensativity.csv"))
@@ -269,42 +270,41 @@ ch4_n20_bison<- n2o_ch4 %>%
   group_by(Practice)
 
 ch4_n20_kernza_plot<- ggplot(ch4_n20_kernza, aes(y = kg_co2e, x = Gas, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False", width = 0.5)+
   facet_wrap(~Practice)+
-  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
+  scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
   labs(title = "Kernza", y = "kgCO2e", x = element_blank())+
   theme_classic()
 ch4_n20_kernza_plot
 
 ch4_n20_cotton_plot<- ggplot(ch4_n20_cotton, aes(y = kg_co2e, x = Gas, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False", width = 0.5)+
   facet_wrap(~Practice)+
-  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()
 ch4_n20_cotton_plot
 
 ch4_n20_mango_plot<- ggplot(ch4_n20_mango, aes(y = kg_co2e, x = Gas, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False", width = 0.5)+
   facet_wrap(~Practice)+
-  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
   labs(title = "Mango", y = "kgCO2e", x = element_blank())+
   theme_classic()
 ch4_n20_mango_plot
 
 ch4_n20_bison_plot<- ggplot(ch4_n20_bison, aes(y = kg_co2e, x = Gas, fill = Gas))+
-  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False", width = 0.5)+
   facet_wrap(~Practice)+
-  scale_fill_manual(values = c("darkolivegreen1", "darkolivegreen"))+
+  scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
   labs(title = "Bison", y = element_blank(), x = element_blank())+
   theme_classic()
 ch4_n20_bison_plot
 
-ch4_n2o_total<- plot(ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot))
+ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot)
 
-ch4_n2o_total
 
-grid.arrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_bison_plot, ncol = 2, nrow = 2)
+
 
 # make a bar chart of the n2o_ch4 data frame
 
@@ -318,14 +318,14 @@ Graph #5 (Bar Location) TC
 # Kernza
 #############
 ##### SOC
-kernza_uk_regen_soc<- sum(kernza$End_SOC[1:18])
-kernza_uk_organic_soc<- sum(kernza$End_SOC[19:36])
+kernza_uk_regen_soc<- sum(kernza$dSOC[1:18])
+kernza_uk_organic_soc<- sum(kernza$dSOC[19:36])
 
-kernza_min_regen_soc<- sum(kernza$End_SOC[55:72])
-kernza_min_organic_soc<- sum(kernza$End_SOC[37:54])
+kernza_min_regen_soc<- sum(kernza$dSOC[55:72])
+kernza_min_organic_soc<- sum(kernza$dSOC[37:54])
 
-kernza_ks_regen_soc<- sum(kernza$End_SOC[91:108])
-kernza_ks_organic_soc<- sum(kernza$End_SOC[73:90])
+kernza_ks_regen_soc<- sum(kernza$dSOC[91:108])
+kernza_ks_organic_soc<- sum(kernza$dSOC[73:90])
 
 ###### GWP
 
@@ -367,17 +367,17 @@ kernza_location_gwp_plot
 # Cotton
 ########
 ###### SOC
-cotton_china_regen_soc<- sum(cotton$End_SOC[83:100])
-cotton_china_organic_soc<- sum(cotton$End_SOC[3:20])
+cotton_china_regen_soc<- sum(cotton$dSOC[83:100])
+cotton_china_organic_soc<- sum(cotton$dSOC[3:20])
 
-cotton_india_regen_soc<- sum(cotton$End_SOC[123:140])
-cotton_india_organic_soc<- sum(cotton$End_SOC[43:60])
+cotton_india_regen_soc<- sum(cotton$dSOC[123:140])
+cotton_india_organic_soc<- sum(cotton$dSOC[43:60])
 
-cotton_texas_regen_soc<- sum(cotton$End_SOC[103:120])
-cotton_texas_organic_soc<- sum(cotton$End_SOC[23:40])
+cotton_texas_regen_soc<- sum(cotton$dSOC[103:120])
+cotton_texas_organic_soc<- sum(cotton$dSOC[23:40])
 
-cotton_peru_regen_soc<- sum(cotton$End_SOC[143:160])
-cotton_peru_organic_soc<- sum(cotton$End_SOC[63:80])
+cotton_peru_regen_soc<- sum(cotton$dSOC[143:160])
+cotton_peru_organic_soc<- sum(cotton$dSOC[63:80])
 
 ######### GWP
 
@@ -422,20 +422,20 @@ cotton_location_gwp_plot
 # Mango
 ######
 ######## SOC
-mango_india_regen_soc<- sum(mango$End_SOC[1:18])
-mango_india_organic_soc<- sum(mango$End_SOC[19:36])
+mango_india_regen_soc<- sum(mango$dSOC[1:18])
+mango_india_organic_soc<- sum(mango$dSOC[19:36])
 
-mango_nicaragua_regen_soc<- sum(mango$End_SOC[37:54])
-mango_nicaragua_organic_soc<- sum(mango$End_SOC[55:72])
+mango_nicaragua_regen_soc<- sum(mango$dSOC[37:54])
+mango_nicaragua_organic_soc<- sum(mango$dSOC[55:72])
 ######## GWP
 
-mango_india_regen_gwp<- ((sum(mango$End_SOC[1:18])/12)*44) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*44)*265)
+mango_india_regen_gwp<- ((sum(mango$dSOC[1:18])/12)*44) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*44)*265)
 
-mango_india_organic_gwp<- ((sum(mango$End_SOC[19:36])/12)*44) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*44)*265)
+mango_india_organic_gwp<- ((sum(mango$dSOC[19:36])/12)*44) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*44)*265)
 
-mango_nicaragua_regen_gwp<- ((sum(mango$End_SOC[37:54])/12)*44) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*44)*265)
+mango_nicaragua_regen_gwp<- ((sum(mango$dSOC[37:54])/12)*44) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*44)*265)
 
-mango_nicaragua_organic_gwp<- ((sum(mango$End_SOC[55:72])/12)*44) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*44)*265)
+mango_nicaragua_organic_gwp<- ((sum(mango$dSOC[55:72])/12)*44) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*44)*265)
   
 # Make the data set
 
@@ -466,11 +466,11 @@ mango_location_gwp_plot
 # Bison
 ##################
 
-bison_sd_regen_soc<- sum(bison$End_SOC[63:80])
-bison_sd_organic_soc<- sum(bison$End_SOC[45:60])
+bison_sd_regen_soc<- sum(bison$dSOC[63:80])
+bison_sd_organic_soc<- sum(bison$dSOC[45:60])
 
-bison_bz_regen_soc<- sum(bison$End_SOC[23:40])
-bison_bz_organic_soc<- sum(bison$End_SOC[3:20])
+bison_bz_regen_soc<- sum(bison$dSOC[23:40])
+bison_bz_organic_soc<- sum(bison$dSOC[3:20])
 
 bison_sd_regen_gwp<- sum(bison$GWP[63:80])
 bison_sd_organic_gwp<- sum(bison$GWP[45:60])
@@ -512,35 +512,28 @@ location_gwp_plots<- ggarrange(kernza_location_gwp_plot, cotton_location_gwp_plo
 location_soc_plots
 location_gwp_plots
 
-location_plots<- ggarrange(location_soc_plots, location_gwp_plots,
-                           ncol = 2, nrow = 1)
-location_plots
 
-grid.arrange(location_soc_plots, location_gwp_plots, ncol = 2, nrow = 1)
-
-
-#### Try to make one data frame and one graph
-
-location_df<- data.frame(Crop = c("Kernza", "Kernza", "Kernza", "Kernza", "Kernza", "Kernza", "Cotton", "Cotton","Cotton","Cotton","Cotton","Cotton","Cotton","Cotton", "Mango", "Mango", "Mango", "Mango", "Bison", "Bison", "Bison", "Bison"), 
-Location = c("Scotland", "Scotland","Minnesota", "Minnesota", "Kansas", "Kansas", "China", "China","India", "India", "Texas", "Texas", "Peru", "Peru", "India", "India","Nicaragua", "Nicaragua", "South Dakota", "South Dakota","Brazil", "Brazil"),
-                         Practice = c("Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic", "Regenerative", "Organic","Regenerative", "Organic"),
-                         SOC = c(kernza_uk_regen_soc, kernza_uk_organic_soc, kernza_min_regen_soc, kernza_min_organic_soc, kernza_ks_regen_soc, kernza_ks_organic_soc, cotton_china_regen_soc, cotton_china_organic_soc, cotton_india_regen_soc, cotton_india_organic_soc, cotton_texas_regen_soc, cotton_texas_organic_soc, cotton_peru_regen_soc, cotton_peru_organic_soc, mango_india_regen_soc, mango_india_organic_soc, mango_nicaragua_regen_soc, mango_nicaragua_organic_soc, bison_sd_regen_soc, bison_sd_organic_soc, bison_bz_regen_soc, bison_bz_organic_soc),
-                         GWP = c(kernza_uk_regen_gwp, kernza_uk_organic_gwp, kernza_min_regen_gwp, kernza_min_organic_gwp, kernza_ks_regen_gwp, kernza_ks_organic_gwp, cotton_china_regen_gwp, cotton_china_organic_gwp, cotton_india_regen_gwp, cotton_india_organic_gwp, cotton_texas_regen_gwp, cotton_texas_organic_gwp, cotton_peru_regen_gwp, cotton_peru_organic_gwp, mango_india_regen_gwp, mango_india_organic_gwp, mango_nicaragua_regen_gwp, mango_nicaragua_organic_gwp, bison_sd_regen_gwp, bison_sd_organic_gwp, bison_bz_regen_gwp, bison_bz_organic_gwp)) %>% 
-  group_by(Practice)
-
-location_total_plot<- ggplot()+
-  geom_bar(data = location_df, aes(y = GWP, x = Location, fill = Practice), stat = "identity", position = "dodge", width = 0.5)+
-  geom_bar(data = location_df, aes(y = SOC, x = Location, fill = Practice), stat = "identity", position = "dodge", width = 0.5)+
-  facet_wrap(~ Crop)+
-  theme_classic()+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-location_total_plot
-  
 
 ```
 
 Graph #6 (Bar Climate) TC
 ```{r}
+
+cotton_india_regen_soc
+cotton_nc_regen_nc<- sum(all_data$dSOC[307:324])
+
+
+kernza_min_regen_soc
+kernza_min_organic_soc
+kernza_nc_regen_soc<- sum(kernza_updated$dSOC[127:144])
+kernza_nc_organic_soc<- sum(kernza_updated$dSOC[109:126])
+
+mango_nicaragua_regen_soc
+mango_nicaragua_organic_soc
+mango_nc_regen_soc<- sum(mango_nc$dSOC[63:80])
+mango_nc_organic_soc<- sum(mango_nc$dSOC[43:60])
+  
+
 
 ```
 
