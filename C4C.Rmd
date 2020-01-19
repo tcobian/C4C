@@ -310,6 +310,39 @@ ggarrange(ch4_n20_kernza_plot, ch4_n20_cotton_plot, ch4_n20_mango_plot, ch4_n20_
 
 # Perform t-test on the bar chart to test fro significance
 
+
+########
+# do the t.test for all the N20 and CH4
+#######
+
+# KERNZA
+kernza_regen_organic_n2o_t<- t.test(kernza$N2O_CO2e[55:72], kernza$N2O_CO2e[37:54])
+kernza_regen_organic_n2o_t
+kernza_regen_organic_ch4_t<- t.test(kernza$CH4_CO2e[55:72], kernza$CH4_CO2e[37:54])
+kernza_regen_organic_ch4_t
+# there is no significant difference between the N2O and CH4 impact between regen and organic for KERNZA
+
+#COTTON
+cotton_regen_organic_n20_t<- t.test(cotton$N2O[103:120], cotton$N2O[23:40])
+cotton_regen_organic_n20_t
+cotton_regen_organic_ch4_t<- t.test(cotton$CH4[103:120], cotton$CH4[23:40])
+cotton_regen_organic_ch4_t
+# there is a significant difference between the N20 and CH4 for regen and oragnic for COTTON
+
+
+#MANGO 
+mango_regen_organic_n20_t<- t.test(all_data$N2O_CO2e[639:656], all_data$N2O_CO2e[657:674])
+mango_regen_organic_n20_t
+mango_regen_organic_ch4_t<- t.test(all_data$CH4_CO2e[639:656], all_data$CH4_CO2e[657:674])
+mango_regen_organic_ch4_t
+# there was not a significant difference between n20 between regen and pragnic but there was a sognificant difference between ch4 regen and organic
+
+# BISON
+bison_regen_organic_n20<- t.test(bison$N2O_GWP[63:80], bison$N2O_GWP[43:60])
+bison_regen_organic_n20
+bison_regen_organic_ch4<- t.test(bison$CH4_GWP[63:80], bison$CH4_GWP[43:60])
+bison_regen_organic_ch4
+# there is a significant difference between regen and organic in N20 and CH4
 ```
 
 Graph #5 (Bar Location) TC
@@ -429,14 +462,14 @@ mango_nicaragua_regen_soc<- sum(mango$dSOC[37:54])
 mango_nicaragua_organic_soc<- sum(mango$dSOC[55:72])
 ######## GWP
 
-mango_india_regen_gwp<- ((sum(mango$dSOC[1:18])/12)*44) + (((sum(mango$CH4[1:18])/12)*16)*28) + (((sum(mango$N2O_flux[1:18])/28)*44)*265)
+mango_india_regen_gwp<- sum(all_data$GWP[603:620])
 
-mango_india_organic_gwp<- ((sum(mango$dSOC[19:36])/12)*44) + (((sum(mango$CH4[19:36])/12)*16)*28) + (((sum(mango$N2O_flux[19:36])/28)*44)*265)
+mango_india_organic_gwp<- sum(all_data$GWP[621:638])
 
-mango_nicaragua_regen_gwp<- ((sum(mango$dSOC[37:54])/12)*44) + (((sum(mango$CH4[37:54])/12)*16)*28) + (((sum(mango$N2O_flux[37:54])/28)*44)*265)
+mango_nicaragua_regen_gwp<- sum(all_data$GWP[639:656])
 
-mango_nicaragua_organic_gwp<- ((sum(mango$dSOC[55:72])/12)*44) + (((sum(mango$CH4[55:72])/12)*16)*28) + (((sum(mango$N2O_flux[55:72])/28)*44)*265)
-  
+mango_nicaragua_organic_gwp<- sum(all_data$GWP[657:674])
+
 # Make the data set
 
 mango_location<- data.frame(Location = c("India", "India","Nicaragua", "Nicaragua"),
@@ -565,23 +598,48 @@ cotton_india_texas_regen_soc_t<- t.test(cotton$dSOC[123:140], cotton$dSOC[103:12
 cotton_india_texas_regen_soc_t
 # peru and india are not significantly different and China and India are not significantly different
 
+# test for GWP
+cotton_peru_china_regen_gwp_t<- t.test(cotton$GWP[143:160], cotton$GWP[83:100])
+cotton_peru_china_regen_gwp_t
+cotton_peru_india_regen_gwp_t<- t.test(cotton$GWP[143:160], cotton$GWP[143:160])
+cotton_peru_india_regen_gwp_t
+cotton_peru_texas_regen_gwp_t<- t.test(cotton$GWP[143:160], cotton$GWP[103:120])
+cotton_peru_texas_regen_gwp_t
+cotton_china_india_regen_gwp_t<- t.test(cotton$GWP[83:100], cotton$GWP[123:140])
+cotton_china_india_regen_gwp_t
+cotton_china_texas_regen_gwp_t<- t.test(cotton$GWP[83:100], cotton$GWP[103:120])
+cotton_china_texas_regen_gwp_t
+cotton_india_texas_regen_gwp_t<- t.test(cotton$GWP[123:140], cotton$GWP[103:120])
+cotton_india_texas_regen_gwp_t
+# There is not a sognigicatn difference between the GWP for Peru and India for cotton but besides that all are significantly different
 
 
+# MANGO
+mango_nic_india_regen_soc_t<- t.test(mango$dSOC[37:54], mango$dSOC[1:18])
+mango_nic_india_regen_soc_t
+mango_nic_india_organic_soc_t<- t.test(mango$dSOC[55:72], mango$dSOC[19:36])
+mango_nic_india_organic_soc_t
+# there is no significatn difference between the SOC for regen or organic in India or Nicaragua for mangos
+
+mango_nic_india_regen_gwp_t<- t.test(all_data$GWP[639:656], all_data$GWP[603:620])
+mango_nic_india_regen_gwp_t
+mango_nic_india_organic_gwp_t<- t.test(all_data$GWP[657:674], all_data$GWP[621:638])
+mango_nic_india_organic_gwp_t
+# there is not a significant difference between India and Nicaragua GWP in regenerative or organic 
 
 
-cotton_china_regen_soc<- sum(cotton$dSOC[83:100])
-cotton_china_organic_soc<- sum(cotton$dSOC[3:20])
+#BISON
+bison_sd_bz_regen_soc_t<- t.test(bison$dSOC[63:80], bison$dSOC[23:40])
+bison_sd_bz_regen_soc_t
+bison_sd_bz_organic_soc_t<- t.test(bison$dSOC[45:60], bison$dSOC[3:20])
+bison_sd_bz_organic_soc_t
+# there is a significant difference between South Dakota and Brazil for regen and organic on SOC output
 
-cotton_india_regen_soc<- sum(cotton$dSOC[123:140])
-cotton_india_organic_soc<- sum(cotton$dSOC[43:60])
-
-cotton_texas_regen_soc<- sum(cotton$dSOC[103:120])
-cotton_texas_organic_soc<- sum(cotton$dSOC[23:40])
-
-cotton_peru_regen_soc<- sum(cotton$dSOC[143:160])
-cotton_peru_organic_soc<- sum(cotton$dSOC[63:80])
-
-
+bison_sd_bz_regen_gwp_t<- t.test(bison$GWP[63:80], bison$GWP[23:40])
+bison_sd_bz_regen_gwp_t
+bison_sd_bz_organic_gwp_t<- t.test(bison$GWP[45:60], bison$GWP[3:20])
+bison_sd_bz_organic_gwp_t
+# there is a significant difference in South Dakota and Brazil GWP for regen
 
 ```
 
