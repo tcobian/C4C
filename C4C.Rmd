@@ -32,7 +32,8 @@ kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
 kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
 mango<- read_csv(here("DATA", "mango_total.csv"))
 mango_compost<-read_csv(here("DATA", "MANGO_nutr_sens.csv"))
-mango_crops<-read_csv(here("DATA", "MANGO_sens.csv"))
+mango_crops<-read_csv(here("DATA", "MANGO_sens.csv")) %>% 
+  mutate(GWP=dSOC*-44/12+CH4*16*28/12+N2O_flux*44*265/28)
 mango_nc<- read_csv(here("DATA", "MANGO_total_noclimate.csv"))
 bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
 bison<- read_csv(here("DATA", "bison_total.csv"))
@@ -920,20 +921,20 @@ cotton_four_s<-sum(all_data$dSOC[415:432])
 cotton_regen_india_s<- sum(all_data$dSOC[217:234])
 
 
-bison_mono_s<- sum(bison_crop$dSOC[60:43])
-bison_two_s<-sum(bison_crop$dSOC[20:3])
-bison_three_s<-sum(bison_crop$dSOC[40:23])
-bison_four_s<-sum(bison_crop$dSOC[80:63])
-bison_sd_s<- sum(all_data$dSOC[585:602])
+bison_mono_s<- sum(bison_crop$dSOC[23:40])
+bison_two_s<-sum(bison_crop$dSOC[43:60])
+bison_three_s<-sum(bison_crop$dSOC[63:803])
+bison_four_s<-sum(bison_crop$dSOC[83:100])
+bison_sd_s<- sum(all_data$dSOC[103:120])
 
 mango_mono_s<- sum(mango_crops$dSOC[37:54])
 mango_two_s<-sum(mango_crops$dSOC[19:36])
-mango_regen_s<-sum(mango_crops$dSOC[1:8])
+mango_regen_s<-sum(mango_crops$dSOC[1:18])
 
 
-kernza_mono_s<- sum(call_data$dSOC[60:43])
-kernza_two_s<-sum(all_data$dSOC[20:3])
-kernza_three_s<-sum(all_data$dSOC[40:23])
+kernza_mono_s<- sum(kernza_updated$dSOC[1:18])
+kernza_two_s<-sum(kernza_updated$dSOC[55:72])
+kernza_three_s<-sum(kernza_updated$dSOC[91:108])
 
 
 cotton_mono_g<- sum(all_data$GWP[361:378])
@@ -943,17 +944,111 @@ cotton_four_g<-sum(all_data$GWP[415:432])
 cotton_regen_india_g<- sum(all_data$GWP[217:234])
 
 
-bison_mono_g<- sum(bison_crop$GWP[60:43])
-bison_two_g<-sum(bison_crop$GWP[20:3])
-bison_three_g<-sum(bison_crop$GWP[40:23])
-bison_four_g<-sum(bison_crop$GWP[80:63])
-bison_sd_g<- sum(all_data$GWP[585:602])
+bison_mono_g<- sum(bison_crop$GWP[23:40])
+bison_two_g<-sum(bison_crop$GWP[43:60])
+bison_three_g<-sum(bison_crop$GWP[63:80])
+bison_four_g<-sum(bison_crop$GWP[83:100])
+bison_sd_g<- sum(all_data$GWP[103:120])
 
 mango_mono_g<- sum(mango_crops$GWP[37:54])
 mango_two_g<-sum(mango_crops$GWP[20:3])
 mango_regen_g<-sum(mango_crops$GWP[1:18])
 
+kernza_mono_g<- sum(kernza_updated$GWP[1:18])
+kernza_two_g<-sum(kernza_updated$GWP[55:72])
+kernza_three_g<-sum(kernza_updated$GWP[91:108])
 
+cropping_data<- data.frame(Country = c("India", "India","India", "India","India","South Dakota", "South Dakota","South Dakota", "South Dakota","South Dakota", "Nicaragua", "Nicaragua", "Nicaragua", "Minnesota","Minnesota", "Minnesota"),
+                   Crop = c("Cotton", "Two Crops", "Three Crops", "Four Crops", "Regenerative", "Grass", "Two Crops", "Three Crops","Four Crops", "Regenerative", "Mango", "Two Crops","Regenerative","Kernza Wheat", "Two Crops", "Regenerative"),
+                   GWP = c(cotton_mono_g, cotton_two_g,cotton_three_g, cotton_four_g,cotton_regen_india_g, bison_mono_g, bison_two_g, bison_three_g, bison_four_g,bison_sd_g, mango_mono_g,mango_two_g,mango_regen_g,kernza_mono_g, kernza_two_g,kernza_three_g),
+                   SOC=c(cotton_mono_s, cotton_two_s,cotton_three_s, cotton_four_s,cotton_regen_india_s, bison_mono_s, bison_two_s, bison_three_s, bison_four_s,bison_sd_s, mango_mono_s,mango_two_s,mango_regen_s,kernza_mono_s, kernza_two_s,kernza_three_s)) %>% 
+  group_by(Country)
+
+
+              
+
+cropping_data_cotton<-cropping_data %>% 
+  filter(Country=="India")
+
+cropping_data_cotton$Crop <- factor(cropping_data_cotton$Crop,levels = c("Cotton", "Two Crops", "Three Crops", "Four Crops", "Regenerative"))
+  
+crop_sens_SOC_india<- ggplot(cropping_data_cotton, aes(y = SOC, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="Total Change in SOC(kg/ha)", title= "Cotton in India",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_SOC_india
+
+cropping_data_bison<-cropping_data %>% 
+  filter(Country=="South Dakota")
+
+cropping_data_bison$Crop <- factor(cropping_data_bison$Crop,levels = c("Grass", "Two Crops", "Three Crops", "Four Crops", "Regenerative"))
+  
+crop_sens_SOC_SD<- ggplot(cropping_data_bison, aes(y = SOC, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="Total Change in SOC(kg/ha)", title= "Grazing in South Dakota",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_SOC_SD
+
+cropping_data_mango<-cropping_data %>% 
+  filter(Country=="Nicaragua")
+
+cropping_data_mango$Crop <- factor(cropping_data_mango$Crop,levels = c("Mango", "Two Crops", "Three Crops", "Regenerative"))
+
+crop_sens_SOC_nic<- ggplot(cropping_data_mango, aes(y = SOC, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="Total Change in SOC(kg/ha)", title="Mango in Nicaragua",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_SOC_nic
+
+cropping_data_kernza<-cropping_data %>% 
+  filter(Country=="Minnesota")
+
+cropping_data_kernza$Crop <- factor(cropping_data_kernza$Crop,levels = c("Kernza Wheat", "Two Crops", "Three Crops", "Regenerative"))
+
+crop_sens_SOC_mn<- ggplot(cropping_data_kernza, aes(y = SOC, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="Total Change in SOC(kg/ha)", title="Kernza Wheat in Minnesota",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_SOC_mn
+
+
+
+crop_sens_gwp_india<- ggplot(cropping_data_cotton, aes(y = GWP, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="kg CO2e/ha", title= "Cotton in India",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_gwp_india
+
+
+crop_sens_gwp_sd<- ggplot(cropping_data_bison, aes(y = GWP, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="kg CO2e/ha", title= "Grazing in South Dakota",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_gwp_sd
+
+crop_sens_gwp_nic<- ggplot(cropping_data_mango, aes(y = GWP, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="kg CO2e/ha", title= "Mango in Nicaragua",x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_gwp_nic
+
+crop_sens_gwp_mn<- ggplot(cropping_data_kernza, aes(y = GWP, x = Crop, fill = Crop))+
+  geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
+  labs(y ="kg CO2e/ha", title= "Kernza Wheat in Minnesota", x= "Cropping structure")+
+  theme_classic()
+
+crop_sens_gwp_mn
+
+ggarrange(crop_sens_gwp_india,crop_sens_gwp_sd,crop_sens_gwp_nic,crop_sens_gwp_mn)
+
+ggarrange(crop_sens_SOC_india,crop_sens_SOC_sd,crop_sens_SOC_nic,crop_sens_SOC_mn)
 ```
 
 Graph #9 (Bar tillage sensitivity) ID
