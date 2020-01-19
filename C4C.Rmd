@@ -512,6 +512,75 @@ location_gwp_plots<- ggarrange(kernza_location_gwp_plot, cotton_location_gwp_plo
 location_soc_plots
 location_gwp_plots
 
+########
+# Perform t-tests for location differences
+#######
+# KERNZA
+kernza_kansas_min_regen_soc_t<- t.test(kernza$dSOC[91:108], kernza$dSOC[55:72])
+kernza_kansas_min_regen_soc_t
+kernza_kansas_uk_regen_soc_t<- t.test(kernza$dSOC[91:108], kernza$dSOC[1:18])
+kernza_kansas_uk_regen_soc_t
+kernza_uk_min_regen_soc_t<- t.test(kernza$dSOC[1:18], kernza$dSOC[55:72])
+kernza_uk_min_regen_soc_t
+# under regenerative practices all of the sites are significantly fdifferent SOC values for kernza
+
+kernza_kansas_min_regen_gwp_t<- t.test(kernza$GWP[91:108], kernza$GWP[55:72])
+kernza_kansas_min_regen_gwp_t
+kernza_kansas_uk_regen_gwp_t<- t.test(kernza$GWP[91:108], kernza$GWP[1:18])
+kernza_kansas_uk_regen_gwp_t
+kernza_uk_min_regen_gwp_t<- t.test(kernza$GWP[1:18], kernza$GWP[55:72])
+kernza_uk_min_regen_gwp_t
+# under regenerative practices all of the sites are significantly fdifferent GWP values for kernza
+
+
+kernza_kansas_min_regen_soc_t<- t.test(kernza$dSOC[73:90], kernza$dSOC[37:54])
+kernza_kansas_min_regen_soc_t
+kernza_kansas_uk_regen_soc_t<- t.test(kernza$dSOC[73:90], kernza$dSOC[19:36])
+kernza_kansas_uk_regen_soc_t
+kernza_uk_min_regen_soc_t<- t.test(kernza$dSOC[19:36], kernza$dSOC[37:54])
+kernza_uk_min_regen_soc_t
+# under organic practices all of the sites are significantly fdifferent SOC values for kernza
+
+
+kernza_kansas_min_regen_gwp_t<- t.test(kernza$GWP[73:90], kernza$GWP[37:54])
+kernza_kansas_min_regen_gwp_t
+kernza_kansas_uk_regen_gwp_t<- t.test(kernza$GWP[73:90], kernza$GWP[19:36])
+kernza_kansas_uk_regen_gwp_t
+kernza_uk_min_regen_gwp_t<- t.test(kernza$GWP[19:36], kernza$GWP[37:54])
+kernza_uk_min_regen_gwp_t
+# under organic practices all of the sites are significantly fdifferent GWP values for kernza
+
+# COTTON
+cotton_peru_china_regen_soc_t<- t.test(cotton$dSOC[143:160], cotton$dSOC[83:100])
+cotton_peru_china_regen_soc_t
+cotton_peru_india_regen_soc_t<- t.test(cotton$dSOC[143:160], cotton$dSOC[143:160])
+cotton_peru_india_regen_soc_t
+cotton_peru_texas_regen_soc_t<- t.test(cotton$dSOC[143:160], cotton$dSOC[103:120])
+cotton_peru_texas_regen_soc_t
+cotton_china_india_regen_soc_t<- t.test(cotton$dSOC[83:100], cotton$dSOC[123:140])
+cotton_china_india_regen_soc_t
+cotton_china_texas_regen_soc_t<- t.test(cotton$dSOC[83:100], cotton$dSOC[103:120])
+cotton_china_texas_regen_soc_t
+cotton_india_texas_regen_soc_t<- t.test(cotton$dSOC[123:140], cotton$dSOC[103:120])
+cotton_india_texas_regen_soc_t
+# peru and india are not significantly different and China and India are not significantly different
+
+
+
+
+
+cotton_china_regen_soc<- sum(cotton$dSOC[83:100])
+cotton_china_organic_soc<- sum(cotton$dSOC[3:20])
+
+cotton_india_regen_soc<- sum(cotton$dSOC[123:140])
+cotton_india_organic_soc<- sum(cotton$dSOC[43:60])
+
+cotton_texas_regen_soc<- sum(cotton$dSOC[103:120])
+cotton_texas_organic_soc<- sum(cotton$dSOC[23:40])
+
+cotton_peru_regen_soc<- sum(cotton$dSOC[143:160])
+cotton_peru_organic_soc<- sum(cotton$dSOC[63:80])
+
 
 
 ```
