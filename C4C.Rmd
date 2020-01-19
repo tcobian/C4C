@@ -1056,7 +1056,7 @@ ggarrange(crop_sens_SOC_india,crop_sens_SOC_sd,crop_sens_SOC_nic,crop_sens_SOC_m
 ```
 
 Graph #9 (Bar tillage sensitivity) ID
-```{r}
+```{r, fig.height=3, fig.width=4}
 
 cotton_tillage<-cotton %>% 
   filter(Practice=="Tillage"| Practice=="Regenerative")
@@ -1099,7 +1099,7 @@ tillage_SOC<- ggplot(tillage_data, aes(y = SOC, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Country)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="Total Change in SOC(kg/ha)")+
+  labs(y ="Total Change in SOC(kg/ha)", title = "Sensitivity Analysis of Tillage: Total Change in SOC ")+
   theme_classic()
 
 tillage_SOC
@@ -1109,7 +1109,7 @@ tillage_GWP<- ggplot(tillage_data, aes(y = GWP, x = Practice, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Country)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="kg CO2e/ha")+
+  labs(y ="kg CO2e/ha", title = "Sensitivity Analysis of Tillage: Total Change in Global Warming Potential ")+
   theme_classic()
 
 tillage_GWP
