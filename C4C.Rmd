@@ -855,7 +855,7 @@ bison_climate_organic_gwp_t# there is a sognificant difference between Bison org
 
 
 Graph #7 (Bar compost/manure sensitivity) ID
-```{r}
+```{r, fig.height=3, fig.width=4}
 
 cotton_manure_s<- sum(all_data$dSOC[217:234])
 bison_compost_s<-sum(all_data$dSOC[585:602])
@@ -882,7 +882,7 @@ mango_nocompost_g<-sum(mango_compost$GWP[37:54])
 
 
 nutrient_data<- data.frame(Crop = c("Cotton", "Cotton", "Bison", "Bison", "Mango", "Mango","Kernza Wheat", "Kernza Wheat"),
-                   Practice = c("Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost", "Regenerative", "Regenerative-Compost"),
+                   Practice = c("Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient"),
                    GWP = c(cotton_manure_g, cotton_nomanure_g,bison_compost_g, bison_nocompost_g,mango_compost_g, mango_nocompost_g, kernza_compost_g, kernza_nocompost_g),
                    SOC=c(cotton_manure_s, cotton_nomanure_s,bison_compost_s, bison_nocompost_s,mango_compost_s, mango_nocompost_s, kernza_compost_s, kernza_nocompost_s)) %>% 
   group_by(Practice)
@@ -892,7 +892,7 @@ nutrient_SOC<- ggplot(nutrient_data, aes(y = SOC, x = Practice, fill = Practice)
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="Total Change in SOC(kg/ha)")+
+  labs(y ="Total Change in SOC(kg/ha)", title = "Sensitivity Analysis of Nutrient Management: Total Change in SOC")+
   theme_classic()
 
 nutrient_SOC
@@ -902,10 +902,12 @@ nutrient_GWP<- ggplot(nutrient_data, aes(y = GWP, x = Practice, fill = Practice)
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   facet_wrap(~Crop)+
   scale_fill_manual(values = c("darkorchid4", "darkorange2"))+
-  labs(y ="kg CO2e/ha")+
+  labs(y ="kg CO2e/ha", title = "Sensitivity Analysis of Nutrient Management: Total Change in Global Warming Potential ")+
   theme_classic()
 
 nutrient_GWP
+
+
 
               
 
