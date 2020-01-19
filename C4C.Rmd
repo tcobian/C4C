@@ -25,6 +25,7 @@ Data
 ```{r, include=FALSE}
 
 cotton<- read_csv(here("DATA", "cotton_combined.csv"))
+cotton_climate_organic<-read.csv(here("DATA","cotton_organic_climate.csv"))
 kernza<- read_csv(here("DATA", "kernza_total.csv"))
 kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
 kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
