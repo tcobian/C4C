@@ -649,10 +649,12 @@ Graph #6 (Bar Climate) TC
 ```{r}
 
 cotton_india_regen_soc
+cotton_india_organic_soc
 cotton_nc_regen_soc<- sum(all_data$dSOC[307:324])
-cotton_climate<- data.frame(Practice = c("Regenerative", "Regenerative"),
-                            Climate = c("India", "No Climate"),
-                            SOC = c(cotton_india_regen_soc, cotton_nc_regen_soc))
+cotton_nc_organic_soc<- sum(cotton_climate_organic$dSOC[3:20])
+cotton_climate<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("India", "No Climate", "India", "No Climate"),
+                            SOC = c(cotton_india_regen_soc, cotton_nc_regen_soc, cotton_india_organic_soc, cotton_nc_organic_soc))
 
 
 kernza_min_regen_soc
@@ -720,10 +722,12 @@ ggarrange(kernza_climate_soc_plot, cotton_climate_soc_plot, mango_climate_soc_pl
 ###### Do the same for GWP
 
 cotton_india_regen_gwp
+cotton_india_organic_gwp
 cotton_nc_regen_gwp<- sum(all_data$GWP[307:324])
-cotton_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative"),
-                            Climate = c("India", "No Climate"),
-                            GWP = c(cotton_india_regen_gwp, cotton_nc_regen_gwp))
+cotton_nc_organic_gwp<- sum(cotton_climate_organic$GWP[3:20])
+cotton_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
+                            Climate = c("India", "No Climate", "India", "No Climate"),
+                            GWP = c(cotton_india_regen_gwp, cotton_nc_regen_gwp, cotton_india_organic_gwp, cotton_nc_organic_gwp))
 
 
 kernza_min_regen_gwp
@@ -737,9 +741,9 @@ kernza_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Or
 mango_nicaragua_regen_gwp
 mango_nicaragua_organic_gwp
 
-mango_nc_regen_gwp<- ((sum(mango_nc$dSOC[62:80])/12)*44) + (((sum(mango_nc$CH4[63:80])/12)*16)*28) + (((sum(mango_nc$N2O_flux[63:80])/28)*44)*265)
+mango_nc_regen_gwp<- (sum(mango_nc$GWP[62:80]))
 
-mango_nc_organic_gwp<- ((sum(mango$dSOC[43:60])/12)*44) + (((sum(mango$CH4[43:60])/12)*16)*28) + (((sum(mango$N2O_flux[43:60])/28)*44)*265)
+mango_nc_organic_gwp<- (sum(mango$GWP[43:60]))
 
 
 mango_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
@@ -826,10 +830,10 @@ mango_climate_regen_soc_t# there is a sognificant difference between Mango regen
 mango_climate_organic_soc_t<- t.test(mango$dSOC[37:54], mango_nc$dSOC[63:80])
 mango_climate_organic_soc_t# there is a sognificant difference between Mango regen SOC with Nicaragua climate and with Shangila climate
 
-mango_climate_regen_gwp_t<- t.test(mango$N2O_flux[37:54], mango_nc$N2O_flux[63:80])
+mango_climate_regen_gwp_t<- t.test(all_data$GWP[37:54], all_data$GWP[63:80])
 mango_climate_regen_gwp_t# there is a sognificant difference between Mango organic GWP with Nicaragua climate and with Shangila climate
 
-mango_climate_organic_gwp_t<- t.test(mango$GWP[37:54], mango_nc$GWP[63:80])
+mango_climate_organic_gwp_t<- t.test(all_data$GWP[37:54], all_data$GWP[63:80])
 mango_climate_organic_gwp_t  # there is a sognificant difference between Mango organic GWP with Nicaragua climate and with Shangila climate
 
 # BISON
