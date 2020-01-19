@@ -556,21 +556,24 @@ kernza_climate_soc_plot<- ggplot(kernza_climate, aes(y = SOC, x = Climate, fill 
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
   labs(title = "Kernza", y = "kgSOC/ha", x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 kernza_climate_soc_plot
 
 cotton_climate_soc_plot<- ggplot(cotton_climate, aes(y = SOC, x = Climate, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 cotton_climate_soc_plot
 
 mango_climate_soc_plot<- ggplot(mango_climate, aes(y = SOC, x = Climate, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("darkorange4", "darkorange"))+
   labs(title = "Mango", y = "kgSOC/ha", x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 mango_climate_soc_plot
 
 
@@ -578,7 +581,8 @@ bison_climate_soc_plot<- ggplot(bison_climate, aes(y = SOC, x = Climate, fill = 
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
   labs(title = "Bison", y = element_blank(), x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 bison_climate_soc_plot
 
 ggarrange(kernza_climate_soc_plot, cotton_climate_soc_plot, mango_climate_soc_plot, bison_climate_soc_plot)
@@ -603,8 +607,12 @@ kernza_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Or
 
 mango_nicaragua_regen_gwp
 mango_nicaragua_organic_gwp
-mango_nc_regen_gwp<- sum(mango_nc$GWP[63:80])
-mango_nc_organic_gwp<- sum(mango_nc$GWP[43:60])
+
+mango_nc_regen_gwp<- ((sum(mango_nc$dSOC[62:80])/12)*44) + (((sum(mango_nc$CH4[63:80])/12)*16)*28) + (((sum(mango_nc$N2O_flux[63:80])/28)*44)*265)
+
+mango_nc_organic_gwp<- ((sum(mango$dSOC[43:60])/12)*44) + (((sum(mango$CH4[43:60])/12)*16)*28) + (((sum(mango$N2O_flux[43:60])/28)*44)*265)
+
+
 mango_climate_gwp<- data.frame(Practice = c("Regenerative", "Regenerative", "Organic", "Organic"),
                             Climate = c("Nicaragua", "No Climate", "Nicaragua", "No Climate"),
                             GWP = c(mango_nicaragua_regen_gwp, mango_nc_regen_gwp, mango_nicaragua_organic_gwp, mango_nc_organic_gwp))
@@ -624,31 +632,55 @@ kernza_climate_gwp_plot<- ggplot(kernza_climate_gwp, aes(y = GWP, x = Climate, f
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("aquamarine4", "aquamarine"))+
   labs(title = "Kernza", y = "kgCO2e/ha", x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 kernza_climate_gwp_plot
 
 cotton_climate_gwp_plot<- ggplot(cotton_climate_gwp, aes(y = GWP, x = Climate, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
-  theme_classic()
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 cotton_climate_gwp_plot
 
-mango_climate_soc_plot<- ggplot(mango_climate, aes(y = SOC, x = Climate, fill = Practice))+
+mango_climate_gwp_plot<- ggplot(mango_climate_gwp, aes(y = GWP, x = Climate, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("darkorange4", "darkorange"))+
   labs(title = "Mango", y = "kgSOC/ha", x = element_blank())+
-  theme_classic()
-mango_climate_soc_plot
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+mango_climate_gwp_plot
 
 
-bison_climate_soc_plot<- ggplot(bison_climate, aes(y = SOC, x = Climate, fill = Practice))+
+bison_climate_gwp_plot<- ggplot(bison_climate_gwp, aes(y = GWP, x = Climate, fill = Practice))+
   geom_bar(stat = "identity", position = "dodge", width = 0.5)+
   scale_fill_manual(values = c("darkslategray", "darkseagreen4"))+
   labs(title = "Bison", y = element_blank(), x = element_blank())+
-  theme_classic()
-bison_climate_soc_plot
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+bison_climate_gwp_plot
 
+ggarrange(kernza_climate_soc_plot, cotton_climate_soc_plot, mango_climate_soc_plot, bison_climate_soc_plot)
+
+ggarrange(kernza_climate_gwp_plot, cotton_climate_gwp_plot, mango_climate_gwp_plot, bison_climate_gwp_plot)
+
+
+##########
+# Perform t- tests
+##########
+
+kernza_climate_regen_soc_t<- t.test(kernza$dSOC[55:72], kernza_updated$dSOC[127:144])
+kernza_climate_regen_soc_t # there is a sognificant difference between Kernza regen SOC with Minnesota climate and with Shangila climate
+
+kernza_climate_organic_soc_t<-t.test(kernza$dSOC[37:54],kernza_updated$dSOC[109:126])
+kernza_climate_organic_soc_t# there is a sognificant difference between Kernza organic SOC with Minnesota climate and with Shangila climate
+
+kernza_climate_regen_gwp_t<- t.test(kernza$GWP[55:72], kernza_updated$GWP[127:144])
+kernza_climate_regen_gwp_t# there is a sognificant difference between Kernza regen GWP with Minnesota climate and with Shangila climate
+
+kernza_climate_organic_gwp_t<- t.test(kernza$GWP[37:54], kernza_updated$GWP[109:126])
+kernza_climate_organic_gwp_t# there is a sognificant difference between Kernza organic GWP with Minnesota climate and with Shangila climate
 ```
 
 Graph #7 (Bar compost/manure sensitivity) ID
