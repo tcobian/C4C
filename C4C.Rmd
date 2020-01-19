@@ -670,6 +670,7 @@ ggarrange(kernza_climate_gwp_plot, cotton_climate_gwp_plot, mango_climate_gwp_pl
 # Perform t- tests
 ##########
 
+# KERNZA
 kernza_climate_regen_soc_t<- t.test(kernza$dSOC[55:72], kernza_updated$dSOC[127:144])
 kernza_climate_regen_soc_t # there is a sognificant difference between Kernza regen SOC with Minnesota climate and with Shangila climate
 
@@ -681,7 +682,42 @@ kernza_climate_regen_gwp_t# there is a sognificant difference between Kernza reg
 
 kernza_climate_organic_gwp_t<- t.test(kernza$GWP[37:54], kernza_updated$GWP[109:126])
 kernza_climate_organic_gwp_t# there is a sognificant difference between Kernza organic GWP with Minnesota climate and with Shangila climate
+
+# COTTON
+cotton_climate_regen_soc_t<- t.test(cotton$dSOC[123:140], all_data$dSOC[307:324])
+cotton_climate_regen_soc_t # there is a sognificant difference between Cotton regen SOC with India climate and with Shangila climate
+
+cotton_climate_regen_gwp_t<- t.test(cotton$GWP[123:140], all_data$GWP[307:324])
+cotton_climate_regen_gwp_t # there is a sognificant difference between Cotton regen GWP with India climate and with Shangila climate
+
+# MANGO
+mango_climate_regen_soc_t<- t.test(mango$dSOC[37:54], mango_nc$dSOC[63:80])
+mango_climate_regen_soc_t# there is a sognificant difference between Mango regen SOC with Nicaragua climate and with Shangila climate
+
+mango_climate_organic_soc_t<- t.test(mango$dSOC[37:54], mango_nc$dSOC[63:80])
+mango_climate_organic_soc_t# there is a sognificant difference between Mango regen SOC with Nicaragua climate and with Shangila climate
+
+mango_climate_regen_gwp_t<- t.test(mango$N2O_flux[37:54], mango_nc$N2O_flux[63:80])
+mango_climate_regen_gwp_t# there is a sognificant difference between Mango organic GWP with Nicaragua climate and with Shangila climate
+
+mango_climate_organic_gwp_t<- t.test(mango$GWP[37:54], mango_nc$GWP[63:80])
+mango_climate_organic_gwp_t  # there is a sognificant difference between Mango organic GWP with Nicaragua climate and with Shangila climate
+
+# BISON
+bison_climate_regen_soc_t<- t.test(bison$dSOC[63:80], bison_nc$dSOC[3:20])
+bison_climate_regen_soc_t# there is a sognificant difference between Bison regen SOC with SD climate and with Shangila climate
+
+bison_climate_organic_soc_t<- t.test(bison$dSOC[45:60], bison_nc$dSOC[23:40])
+bison_climate_organic_soc_t# there is a sognificant difference between Bison organic SOC with SD climate and with Shangila climate
+
+bison_climate_regen_gwp_t<- t.test(bison$GWP[63:80], bison_nc$GWP[3:20])
+bison_climate_regen_gwp_t# there is a sognificant difference between Bison regen GWP with SD climate and with Shangila climate
+
+bison_climate_organic_gwp_t<- t.test(bison$GWP[45:60], bison_nc$GWP[23:40])
+bison_climate_organic_gwp_t# there is a sognificant difference between Bison organic GWP with SD climate and with Shangila climate
+
 ```
+
 
 Graph #7 (Bar compost/manure sensitivity) ID
 ```{r}
