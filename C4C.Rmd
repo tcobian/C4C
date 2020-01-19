@@ -913,7 +913,7 @@ nutrient_GWP
 ```
 
 Graph #8 (Bar crop sensitivity) ID
-```{r}
+```{r, fig.height=6, fig.width=6}
 cotton_mono_s<- sum(all_data$dSOC[361:378])
 cotton_two_s<-sum(all_data$dSOC[379:396])
 cotton_three_s<-sum(all_data$dSOC[397:414])
@@ -984,12 +984,12 @@ cropping_data_bison<-cropping_data %>%
 
 cropping_data_bison$Crop <- factor(cropping_data_bison$Crop,levels = c("Grass", "Two Crops", "Three Crops", "Four Crops", "Regenerative"))
   
-crop_sens_SOC_SD<- ggplot(cropping_data_bison, aes(y = SOC, x = Crop, fill = Crop))+
+crop_sens_SOC_sd<- ggplot(cropping_data_bison, aes(y = SOC, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
   labs(y ="Total Change in SOC(kg/ha)", title= "Grazing in South Dakota",x= "Cropping structure")+
   theme_classic()
 
-crop_sens_SOC_SD
+crop_sens_SOC_sd
 
 cropping_data_mango<-cropping_data %>% 
   filter(Country=="Nicaragua")
@@ -1048,7 +1048,9 @@ crop_sens_gwp_mn
 
 ggarrange(crop_sens_gwp_india,crop_sens_gwp_sd,crop_sens_gwp_nic,crop_sens_gwp_mn)
 
+
 ggarrange(crop_sens_SOC_india,crop_sens_SOC_sd,crop_sens_SOC_nic,crop_sens_SOC_mn)
+
 ```
 
 Graph #9 (Bar tillage sensitivity) ID
