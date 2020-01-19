@@ -32,6 +32,7 @@ kernza_updated<- read_csv(here("DATA", "kernza_updated.csv"))
 kernza_compost<- read_csv(here("DATA", "Kernza_no_compost.csv"))
 mango<- read_csv(here("DATA", "mango_total.csv"))
 mango_compost<-read_csv(here("DATA", "MANGO_nutr_sens.csv"))
+mango_crops<-read_csv(here("DATA", "MANGO_sens.csv"))
 mango_nc<- read_csv(here("DATA", "MANGO_total_noclimate.csv"))
 bison_nc<- read_csv(here("DATA", "bison_total_no_climate.csv"))
 bison<- read_csv(here("DATA", "bison_total.csv"))
@@ -925,9 +926,9 @@ bison_three_s<-sum(bison_crop$dSOC[40:23])
 bison_four_s<-sum(bison_crop$dSOC[80:63])
 bison_sd_s<- sum(all_data$dSOC[585:602])
 
-mango_mono_s<- sum(call_data$dSOC[60:43])
-mango_two_s<-sum(all_data$dSOC[20:3])
-mango_three_s<-sum(all_data$dSOC[40:23])
+mango_mono_s<- sum(mango_crops$dSOC[37:54])
+mango_two_s<-sum(mango_crops$dSOC[19:36])
+mango_regen_s<-sum(mango_crops$dSOC[1:8])
 
 
 kernza_mono_s<- sum(call_data$dSOC[60:43])
@@ -948,9 +949,9 @@ bison_three_g<-sum(bison_crop$GWP[40:23])
 bison_four_g<-sum(bison_crop$GWP[80:63])
 bison_sd_g<- sum(all_data$GWP[585:602])
 
-mango_mono_s<- sum(all_data$GWP[60:43])
-mango_two_s<-sum(all_data$GWP[20:3])
-mango_three_s<-sum(all_data$GWP[40:23])
+mango_mono_g<- sum(mango_crops$GWP[37:54])
+mango_two_g<-sum(mango_crops$GWP[20:3])
+mango_regen_g<-sum(mango_crops$GWP[1:18])
 
 
 ```
