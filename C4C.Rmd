@@ -45,6 +45,7 @@ bison_nocompost<- read_csv(here("DATA", "regen_sd_no_compost.csv"))
 bison_crop<-read_csv(here("DATA", "bison_compiling_sensativity.csv"))
 SOC_change <- read_csv(here("DATA", "soc_change.csv"))
 GWP_only <- read_csv(here("DATA", "GWP_total.csv"))
+sum_data
 
 
 ```
