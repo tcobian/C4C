@@ -1081,6 +1081,26 @@ mango_nocompost_g<-sum(mango_compost$GWP[37:54])
 
 
 
+cotton_nut_SOC_t<- t.test(all_data$dSOC[217:234], all_data$dSOC[343:360])
+cotton_nut_SOC_t
+cotton_nut_GWP_t<- t.test(all_data$GWP[217:234], all_data$GWP[343:360])
+cotton_nut_GWP_t
+
+bison_nut_SOC_t<- t.test(all_data$dSOC[585:602], all_data$dSOC[3:20])
+bison_nut_SOC_t
+bison_nut_GWP_t<- t.test(all_data$GWP[2585:602], all_data$GWP[3:20])
+bison_nut_GWP_t
+
+kernza_nut_SOC_t<- t.test(all_data$dSOC[55:72], kernza_compost$dSOC[3:20])
+kernza_nut_SOC_t
+kernza_nut_GWP_t<- t.test(all_data$GWP[55:72], kernza_compost$GWP[3:20])
+kernza_nut_GWP_t
+
+mango_nut_SOC_t<- t.test(mango_compost$dSOC[1:18], mango_compost$dSOC[37:54])
+mango_nut_SOC_t
+mango_nut_GWP_t<- t.test(mango_compost$GWP[1:18], mango_compost$GWP[37:54])
+mango_nut_GWP_t
+
 
 nutrient_data<- data.frame(Crop = c("Cotton", "Cotton", "Bison", "Bison", "Mango", "Mango","Kernza Wheat", "Kernza Wheat"),
                    Practice = c("Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient", "Regenerative", "Regenerative-Nutrient"),
@@ -1314,6 +1334,29 @@ cotton_till_india_g<-sum(all_data$GWP[325:342])
 cotton_till_china_g<-sum(all_data$GWP[477:494])
 cotton_till_texas_g<-sum(all_data$GWP[513:530])
 cotton_till_peru_g<-sum(all_data$GWP[495:512])
+
+
+tillage_india_SOC_t<- t.test(all_data$dSOC[217:234], all_data$dSOC[325:342])
+tillage_india_SOC_t
+tillage_india_GWP_t<- t.test(all_data$GWP[217:234], all_data$GWP[325:342])
+tillage_india_GWP_t
+
+tillage_china_SOC_t<- t.test(all_data$dSOC[181:198], all_data$dSOC[477:494])
+tillage_china_SOC_t
+tillage_china_GWP_t<- t.test(all_data$GWP[181:198], all_data$GWP[477:494])
+tillage_china_GWP_t
+
+tillage_texas_SOC_t<- t.test(all_data$dSOC[199:216], all_data$dSOC[513:530])
+tillage_texas_SOC_t
+tillage_texas_GWP_t<- t.test(all_data$GWP[199:216], all_data$GWP[513:530])
+tillage_texas_GWP_t
+
+tillage_peru_SOC_t<- t.test(all_data$dSOC[235:252], all_data$dSOC[495:512])
+tillage_peru_SOC_t
+tillage_peru_GWP_t<- t.test(all_data$GWP[235:252], all_data$GWP[495:512])
+tillage_peru_GWP_t
+
+
 
 tillage_data<- data.frame(Country = c("India", "India", "China", "China", "Texas", "Texas","Peru", "Peru"),
                    Practice = c("Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage", "Regenerative", "Regenerative+Tillage"),
