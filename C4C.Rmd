@@ -45,7 +45,7 @@ bison_nocompost<- read_csv(here("DATA", "regen_sd_no_compost.csv"))
 bison_crop<-read_csv(here("DATA", "bison_compiling_sensativity.csv"))
 SOC_change <- read_csv(here("DATA", "soc_change.csv"))
 GWP_only <- read_csv(here("DATA", "GWP_total.csv"))
-sum_data
+sum_data <- read_csv(here("DATA", "Sum_Crops.csv"))
 
 
 ```
@@ -155,6 +155,9 @@ SOC_plot <- plot(ggarrange(kernza_SOC, cotton_SOC, mango_SOC, bison_SOC))
 
 SOC_plot
 
+### dSOC Sum Bar Graph ###
+
+#tbd
 
 ```
 
@@ -216,6 +219,9 @@ gwp_plot <- plot(ggarrange(kernza_gwp, cotton_gwp, mango_gwp, bison_gwp))
 
 gwp_plot
 
+### GWP Sum Bar Graph ###
+
+#tbd
 
 ```
 
