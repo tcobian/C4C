@@ -187,7 +187,7 @@ bison_gwp
 
 cotton_gwp <- ggplot()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = 60000, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = -18000, label = 'Regenerative'))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
   geom_text(aes(x = 16, y = 80000, label = 'Organic'))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
@@ -369,6 +369,38 @@ mango_all_gwp
 ggarrange(cotton_all_soc, kernza_all_soc, mango_all_soc, bison_all_soc)
 
 ggarrange(cotton_all_gwp, kernza_all_gwp, mango_all_gwp, bison_all_gwp)
+
+#######
+# t-test for organic vs regenerative 
+#######
+
+# KERNZA
+
+kernza_3_soc_t <- t.test(all_data$dSOC[55:72], kernza$dSOC[37:54])
+kernza_3_soc_t
+kernza_3_gwp_t <- t.test(all_data$GWP[55:72], kernza$GWP[37:54])
+kernza_3_gwp_t
+
+
+#COTTON
+cotton_3_soc_t <- t.test(all_data$dSOC[217:234], all_data$dSOC[145:162])
+cotton_3_soc_t
+cotton_3_gwp_t <- t.test(all_data$GWP[217:234], all_data$GWP[145:162])
+cotton_3_gwp_t
+
+
+#MANGO 
+mango_3_soc_t <- t.test(all_data$N2O_CO2e[639:656], all_data$N2O_CO2e[657:674])
+mango_3_soc_t
+mango_3_gwp_t <- t.test(all_data$CH4_CO2e[639:656], all_data$CH4_CO2e[657:674])
+mango_3_gwp_t
+
+
+# BISON
+bison_3_soc_t <- t.test(all_data$dSOC[567:584], all_data$dSOC[585:602])
+bison_3_soc_t
+bison_3_gwp_t <- t.test(all_data$GWP[567:584], all_data$GWP[585:602])
+bison_3_gwp_t
 
 
 ```
@@ -741,7 +773,7 @@ kernza_kansas_uk_regen_gwp_t<- t.test(kernza$GWP[73:90], kernza$GWP[19:36])
 kernza_kansas_uk_regen_gwp_t
 kernza_uk_min_regen_gwp_t<- t.test(kernza$GWP[19:36], kernza$GWP[37:54])
 kernza_uk_min_regen_gwp_t
-# under organic practices all of the sites are significantly fdifferent GWP values for kernza
+# under organic practices all of the sites are significantly different GWP values for kernza
 
 # COTTON
 cotton_peru_china_regen_soc_t<- t.test(cotton$dSOC[143:160], cotton$dSOC[83:100])
@@ -1005,7 +1037,7 @@ bison_climate_regen_gwp_t<- t.test(bison$GWP[63:80], bison_nc$GWP[3:20])
 bison_climate_regen_gwp_t# there is a sognificant difference between Bison regen GWP with SD climate and with Shangila climate
 
 bison_climate_organic_gwp_t<- t.test(bison$GWP[45:60], bison_nc$GWP[23:40])
-bison_climate_organic_gwp_t# there is a sognificant difference between Bison organic GWP with SD climate and with Shangila climate
+bison_climate_organic_gwp_t # there is a sognificant difference between Bison organic GWP with SD climate and with Shangila climate
 
 ```
 
