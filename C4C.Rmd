@@ -43,13 +43,14 @@ bison_grazing<- read_csv(here("DATA", "bison_grazing_sensativity.csv"))
 all_data <- read_csv(here("DATA", "Total_Crops.csv"))
 bison_nocompost<- read_csv(here("DATA", "regen_sd_no_compost.csv"))
 bison_crop<-read_csv(here("DATA", "bison_compiling_sensativity.csv"))
+SOC_change <- read_csv(here("DATA", "soc_change.csv"))
+GWP_only <- read_csv(here("DATA", "GWP_total.csv"))
 
 
 ```
 
 Graph #1 (Time Series SOC) AI
 ```{r}
-
 # Need to update 
 
 kernza_regen_SOC <- all_data %>% 
@@ -73,12 +74,12 @@ bison_organic_SOC <- all_data %>%
          group_by(Practice)
 
 cotton_regen_SOC <- all_data %>% 
-  filter(Country == "Texas",
-         Practice == "Regenerativeerative") %>% 
+  filter(Country == "India",
+         Practice == "Regenerative") %>% 
          group_by(Practice)
 
 cotton_organic_SOC <- all_data %>% 
-  filter(Country == "Texas",
+  filter(Country == "India",
          Practice == "Organic") %>% 
          group_by(Practice)
 
@@ -218,7 +219,160 @@ gwp_plot
 Graph #3 (Bar SOC & GWP) AI
 ```{r}
 
+### SOC and GWP Cotton ### India
+
+cotton_3_regen_soc <- sum(all_data$dSOC[217:234])
+cotton_3_organic_soc <- sum(all_data$dSOC[145:162])
+
+cotton_3_regen_gwp <- sum(all_data$GWP[217:234])
+cotton_3_organic_gwp <- sum(all_data$GWP[145:162])
+
+### Creating Data Frame and Plotting ###
+
+### SOC ###
+
+cotton_3_all <- data.frame(Practice = c("Regenerative", "Organic"),
+                            SOC = c(cotton_3_regen_soc, cotton_3_organic_soc),
+                            GWP = c(cotton_3_regen_gwp, cotton_3_organic_gwp))
+
+cotton_all_soc <- ggplot(cotton_3_all, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+cotton_all_soc
+
+### GWP ###
+
+cotton_all_gwp <- ggplot(cotton_3_all, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("deepskyblue4", "deepskyblue"))+
+  labs(title = "Cotton", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+cotton_all_gwp
+
+### SOC & GWP Kernza ### Minnesota
+
+kernza_3_regen_soc<- sum(all_data$dSOC[55:72])
+kernza_3_organic_soc <- sum(all_data$dSOC[37:54])
+
+kernza_3_regen_gwp<- sum(all_data$GWP[55:72])
+kernza_3_organic_gwp <- sum(all_data$GWP[37:54])
+
+### Creating Data Frame and Plotting ###
+
+kernza_3_all <- data.frame(Practice = c("Regenerative", "Organic"),
+                            SOC = c(kernza_3_regen_soc, kernza_3_organic_soc),
+                            GWP = c(kernza_3_regen_gwp, kernza_3_organic_gwp))
+
+### SOC ###
+
+kernza_all_soc <- ggplot(kernza_3_all, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c ("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+kernza_all_soc
+
+### GWP ###
+
+kernza_all_gwp <- ggplot(kernza_3_all, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c ("aquamarine4", "aquamarine"))+
+  labs(title = "Kernza", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+kernza_all_gwp
+
+
+### SOC Bison ### South Dakota 
+
+bison_3_regen_soc<- sum(all_data$dSOC[567:584])
+bison_3_organic_soc<- sum(all_data$dSOC[585:602])
+
+bison_3_regen_gwp<- sum(all_data$GWP[567:584])
+bison_3_organic_gwp<- sum(all_data$GWP[585:602])
+
+### Creating Data Frame and Plotting ###
+
+bison_3_all <- data.frame(Practice = c("Regenerative", "Organic"),
+                            SOC = c(bison_3_regen_soc, bison_3_organic_soc),
+                            GWP = c(bison_3_regen_gwp, bison_3_organic_gwp))
+
+### SOC ###
+
+bison_all_soc <- ggplot(bison_3_all, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c ("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+bison_all_soc
+
+### GWP ###
+
+bison_all_gwp <- ggplot(bison_3_all, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c ("darkslategray", "darkseagreen4"))+
+  labs(title = "Bison", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+bison_all_gwp
+
+### SOC Mango ### Nicaragua
+
+mango_3_regen_soc <- sum(all_data$dSOC[639:656])
+mango_3_organic_soc <- sum(all_data$dSOC[657:674])
+
+mango_3_regen_gwp <- sum(all_data$GWP[639:656])
+mango_3_organic_gwp <- sum(all_data$GWP[657:674])
+
+### Creating Data Frame and Plotting ###
+
+mango_3_all <- data.frame(Practice = c("Regenerative", "Organic"),
+                            SOC = c(mango_3_regen_soc, mango_3_organic_soc),
+                            GWP = c(mango_3_regen_gwp, mango_3_organic_gwp))
+
+### SOC ###
+mango_all_soc <- ggplot(mango_3_all, aes(y = SOC, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+mango_all_soc
+
+### GWP ###
+mango_all_gwp <- ggplot(mango_3_all, aes(y = GWP, x = Practice, fill = Practice))+
+  geom_bar(stat = "identity", position = "dodge", width = 0.5)+
+  scale_fill_manual(values = c("darkorange4", "darkorange"))+
+  labs(title = "Mango", y = element_blank(), x = element_blank())+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+mango_all_gwp
+
+ggarrange(cotton_all_soc, kernza_all_soc, mango_all_soc, bison_all_soc)
+
+ggarrange(cotton_all_gwp, kernza_all_gwp, mango_all_gwp, bison_all_gwp)
+
+
 ```
+
 
 Graph #4 (Bar N2O $ CH4) TC
 ```{r}
@@ -410,6 +564,7 @@ cotton_china_organic_soc<- sum(cotton$dSOC[3:20])
 cotton_india_regen_soc<- sum(cotton$dSOC[123:140])
 cotton_india_organic_soc<- sum(cotton$dSOC[43:60])
 
+
 cotton_texas_regen_soc<- sum(cotton$dSOC[103:120])
 cotton_texas_organic_soc<- sum(cotton$dSOC[23:40])
 
@@ -464,6 +619,7 @@ mango_india_organic_soc<- sum(mango$dSOC[19:36])
 
 mango_nicaragua_regen_soc<- sum(mango$dSOC[37:54])
 mango_nicaragua_organic_soc<- sum(mango$dSOC[55:72])
+
 ######## GWP
 
 mango_india_regen_gwp<- sum(all_data$GWP[603:620])
