@@ -61,7 +61,7 @@ kernza_regen_SOC <- all_data %>%
 kernza_organic_SOC <- all_data %>% 
   filter(Country == "Minnesota",
          Practice == "Organic") %>% 
-        group_by(Practice)
+         group_by(Practice)
 
 bison_regen_SOC <- all_data %>% 
   filter(Country == "South Dakota",
@@ -75,11 +75,13 @@ bison_organic_SOC <- all_data %>%
 
 cotton_regen_SOC <- all_data %>% 
   filter(Country == "India",
+         Crop == "Cotton",
          Practice == "Regenerative") %>% 
          group_by(Practice)
 
 cotton_organic_SOC <- all_data %>% 
   filter(Country == "India",
+         Crop == "Cotton",
          Practice == "Organic") %>% 
          group_by(Practice)
 
@@ -124,9 +126,9 @@ bison_SOC
 
 cotton_SOC <- ggplot ()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = End_SOC), col = "darkorchid4")+
-  geom_text(aes(x = 13, y = 590000, label = "Regenerative"))+
+  geom_text(aes(x = 16, y = 490000, label = "Regenerative"))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = End_SOC), col = "darkorange2")+
-  geom_text(aes(x = 14, y = 500000, label = "Organic"))+
+  geom_text(aes(x = 16, y = 420000, label = "Organic"))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
@@ -187,9 +189,9 @@ bison_gwp
 
 cotton_gwp <- ggplot()+
   geom_line(data = cotton_regen_SOC, aes(x = Year, y = GWP), col = "darkorchid4")+
-  geom_text(aes(x = 16, y = -18000, label = 'Regenerative'))+
+  geom_text(aes(x = 16, y = 200, label = 'Regenerative'))+
   geom_line(data = cotton_organic_SOC, aes(x = Year, y = GWP), col = "darkorange2")+
-  geom_text(aes(x = 16, y = 80000, label = 'Organic'))+
+  geom_text(aes(x = 16, y = 82000, label = 'Organic'))+
   labs(title = "Cotton", y = element_blank(), x = element_blank())+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5)) # center the graph
