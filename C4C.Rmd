@@ -378,30 +378,41 @@ ggarrange(cotton_all_gwp, kernza_all_gwp, mango_all_gwp, bison_all_gwp)
 
 kernza_3_soc_t <- t.test(all_data$dSOC[55:72], kernza$dSOC[37:54])
 kernza_3_soc_t
+#there is no significant difference in kernza crop between organic and regenerative in dSOC (Minnesota)
+
 kernza_3_gwp_t <- t.test(all_data$GWP[55:72], kernza$GWP[37:54])
 kernza_3_gwp_t
+#there is a significant differences in kernza crop between organic and regenerative in GWP (Minnesota)
 
 
 #COTTON
 cotton_3_soc_t <- t.test(all_data$dSOC[217:234], all_data$dSOC[145:162])
 cotton_3_soc_t
+#there is a significant difference in cotton crop between organic and regenerative in dSOC (India)
+
 cotton_3_gwp_t <- t.test(all_data$GWP[217:234], all_data$GWP[145:162])
 cotton_3_gwp_t
+#there is a significant difference in cotton crop between organic and regenerative in GWP (India)
 
 
 #MANGO 
 mango_3_soc_t <- t.test(all_data$N2O_CO2e[639:656], all_data$N2O_CO2e[657:674])
 mango_3_soc_t
+#there is no significant difference in mango crop between organic and regenerative in dSOC (Nicaragua)
+
 mango_3_gwp_t <- t.test(all_data$CH4_CO2e[639:656], all_data$CH4_CO2e[657:674])
 mango_3_gwp_t
+#there is a significant difference in mango crop between organic and regenerative in GWP (Nicaragua)
 
 
 # BISON
 bison_3_soc_t <- t.test(all_data$dSOC[567:584], all_data$dSOC[585:602])
 bison_3_soc_t
+#There is a significant difference in bison grazing between organic and regenerative in dSOC (South Dakota)
+
 bison_3_gwp_t <- t.test(all_data$GWP[567:584], all_data$GWP[585:602])
 bison_3_gwp_t
-
+#There is no significant difference in bizon grazing between organic and regenerative in GWP (South Dakota)
 
 ```
 
