@@ -1175,7 +1175,8 @@ cropping_data_cotton$Crop <- factor(cropping_data_cotton$Crop,levels = c("Cotton
   
 crop_sens_SOC_india<- ggplot(cropping_data_cotton, aes(y = SOC, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="Total Change in SOC(kg/ha)", title= "Cotton in India",x= "Cropping structure")+
+  labs(y =element_blank(), title= "Cotton in India",x= element_blank())+
+    scale_fill_manual(values = c("deepskyblue4","deepskyblue3","deepskyblue2", "deepskyblue","skyblue"))+
   theme_classic()
 
 crop_sens_SOC_india
@@ -1187,19 +1188,22 @@ cropping_data_bison$Crop <- factor(cropping_data_bison$Crop,levels = c("Grass", 
   
 crop_sens_SOC_sd<- ggplot(cropping_data_bison, aes(y = SOC, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="Total Change in SOC(kg/ha)", title= "Grazing in South Dakota",x= "Cropping structure")+
+  labs(y =element_blank(), title= "Grazing in South Dakota",x= element_blank())+
+  scale_fill_manual(values = c( "darkslategray","darkslategray4","darkseagreen4", "darkseagreen3", "darkseagreen2"))+
   theme_classic()
 
 crop_sens_SOC_sd
 
+
 cropping_data_mango<-cropping_data %>% 
   filter(Country=="Nicaragua")
 
-cropping_data_mango$Crop <- factor(cropping_data_mango$Crop,levels = c("Mango", "Two Crops", "Three Crops", "Regenerative"))
+cropping_data_mango$Crop <- factor(cropping_data_mango$Crop,levels = c("Mango", "Two Crops", "Regenerative"))
 
 crop_sens_SOC_nic<- ggplot(cropping_data_mango, aes(y = SOC, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="Total Change in SOC(kg/ha)", title="Mango in Nicaragua",x= "Cropping structure")+
+  labs(y =element_blank(), title="Mango in Nicaragua",x= element_blank())+
+  scale_fill_manual(values = c("darkorange4", "darkorange3","darkorange"))+
   theme_classic()
 
 crop_sens_SOC_nic
@@ -1211,7 +1215,8 @@ cropping_data_kernza$Crop <- factor(cropping_data_kernza$Crop,levels = c("Kernza
 
 crop_sens_SOC_mn<- ggplot(cropping_data_kernza, aes(y = SOC, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="Total Change in SOC(kg/ha)", title="Kernza Wheat in Minnesota",x= "Cropping structure")+
+  labs(y =element_blank(), title="Kernza Wheat in Minnesota",x= element_blank())+
+  scale_fill_manual(values = c("aquamarine4","aquamarine3","aquamarine2", "aquamarine"))+
   theme_classic()
 
 crop_sens_SOC_mn
@@ -1220,7 +1225,8 @@ crop_sens_SOC_mn
 
 crop_sens_gwp_india<- ggplot(cropping_data_cotton, aes(y = GWP, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="kg CO2e/ha", title= "Cotton in India",x= "Cropping structure")+
+  labs(y =element_blank(), title= "Cotton in India",x= element_blank())+
+  scale_fill_manual(values = c("deepskyblue4","deepskyblue3","deepskyblue2", "deepskyblue","skyblue"))+
   theme_classic()
 
 crop_sens_gwp_india
@@ -1228,29 +1234,50 @@ crop_sens_gwp_india
 
 crop_sens_gwp_sd<- ggplot(cropping_data_bison, aes(y = GWP, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="kg CO2e/ha", title= "Grazing in South Dakota",x= "Cropping structure")+
+  labs(y =element_blank(), title= "Grazing in South Dakota",x= element_blank())+
+    scale_fill_manual(values = c( "darkslategray","darkslategray4","darkseagreen4", "darkseagreen3", "darkseagreen2"))+
   theme_classic()
 
 crop_sens_gwp_sd
 
 crop_sens_gwp_nic<- ggplot(cropping_data_mango, aes(y = GWP, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="kg CO2e/ha", title= "Mango in Nicaragua",x= "Cropping structure")+
+  labs(y =element_blank(), title= "Mango in Nicaragua",x= element_blank())+
+  scale_fill_manual(values = c("darkorange4", "darkorange3","darkorange"))+
   theme_classic()
+
 
 crop_sens_gwp_nic
 
 crop_sens_gwp_mn<- ggplot(cropping_data_kernza, aes(y = GWP, x = Crop, fill = Crop))+
   geom_bar(stat = "identity", position = "dodge", show.legend = "False")+
-  labs(y ="kg CO2e/ha", title= "Kernza Wheat in Minnesota", x= "Cropping structure")+
+  labs(y =element_blank(), title= "Kernza Wheat in Minnesota", x= element_blank())+
+  scale_fill_manual(values = c("aquamarine4","aquamarine3","aquamarine2", "aquamarine"))+
   theme_classic()
 
 crop_sens_gwp_mn
 
-ggarrange(crop_sens_gwp_india,crop_sens_gwp_sd,crop_sens_gwp_nic,crop_sens_gwp_mn)
+cropping_gwp<-ggarrange(crop_sens_gwp_india,crop_sens_gwp_sd,crop_sens_gwp_nic,crop_sens_gwp_mn)
+
+annotate_figure(cropping_gwp,
+                top = text_grob("Sensitivity Analysis of Crop Rotation: Total Change in Global Warming Potential",face="bold", size = 14),
+                left = text_grob("kg CO2e/ha",rot=90)
+)
 
 
-ggarrange(crop_sens_SOC_india,crop_sens_SOC_sd,crop_sens_SOC_nic,crop_sens_SOC_mn)
+
+
+cropping_soc<-ggarrange(crop_sens_SOC_india,crop_sens_SOC_sd,crop_sens_SOC_nic,crop_sens_SOC_mn)
+
+
+annotate_figure(cropping_soc,
+                top = text_grob("Sensitivity Analysis of Crop Rotation: Total Change in SOC",face="bold", size = 14),
+                left = text_grob("Total Change in SOC(kg/ha)",rot=90)
+)
+
+
+
+
 
 ```
 
