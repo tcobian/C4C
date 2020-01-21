@@ -1292,7 +1292,7 @@ annotate_figure(cropping_gwp,
                 top = text_grob("Sensitivity Analysis of Crop Rotation: Total Change in Global Warming Potential",face="bold", size = 14),
                 left = text_grob("kg CO2e/ha",rot=90)
 )
-
+ 
 
 
 
